@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://williamleung.cn/posts/1/</loc>
+    
+    <lastmod>2022-05-27</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://williamleung.cn/posts/483895fb/</loc>
+    
+    <lastmod>2022-05-27</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://williamleung.cn/posts/12577bd1/</loc>
     
-    <lastmod>2021-09-22</lastmod>
+    <lastmod>2022-05-27</lastmod>
     
   </url>
   
@@ -15,17 +29,10 @@
     
   </url>
   
-  <url>
-    <loc>http://williamleung.cn/posts/1/</loc>
-    
-    <lastmod>2021-09-20</lastmod>
-    
-  </url>
-  
 
   <url>
     <loc>http://williamleung.cn/</loc>
-    <lastmod>2021-10-05</lastmod>
+    <lastmod>2022-05-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -33,42 +40,42 @@
   
   <url>
     <loc>http://williamleung.cn/tags/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</loc>
-    <lastmod>2021-10-05</lastmod>
+    <lastmod>2022-05-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://williamleung.cn/tags/%E8%AF%B4%E6%98%8E/</loc>
-    <lastmod>2021-10-05</lastmod>
+    <lastmod>2022-05-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://williamleung.cn/tags/AlexNet/</loc>
-    <lastmod>2021-10-05</lastmod>
+    <lastmod>2022-05-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://williamleung.cn/tags/%E8%AE%BA%E6%96%87/</loc>
-    <lastmod>2021-10-05</lastmod>
+    <lastmod>2022-05-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://williamleung.cn/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2021-10-05</lastmod>
+    <lastmod>2022-05-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://williamleung.cn/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</loc>
-    <lastmod>2021-10-05</lastmod>
+    <lastmod>2022-05-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -77,21 +84,21 @@
   
   <url>
     <loc>http://williamleung.cn/categories/%E5%85%B3%E4%BA%8E/</loc>
-    <lastmod>2021-10-05</lastmod>
+    <lastmod>2022-05-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://williamleung.cn/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/</loc>
-    <lastmod>2021-10-05</lastmod>
+    <lastmod>2022-05-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://williamleung.cn/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/</loc>
-    <lastmod>2021-10-05</lastmod>
+    <lastmod>2022-05-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>

@@ -9,69 +9,327 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
     
-        gtag('config', 'UA-72437521-5');</script><!--!--><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"><script src="https://cdnjs.loli.net/ajax/libs/pace/1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="WilliamLeung的个人博客" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item is-active" href="/">主页</a><a class="navbar-item" href="/categories">按类别查看</a><a class="navbar-item" href="/tags">按标签查看</a><a class="navbar-item" href="/archives">按日期查看</a><a class="navbar-item" href="/posts/1/">关于</a></div><div class="navbar-end"><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-09-22T19:21:43.000Z" title="2021/9/23 上午3:21:43">2021-09-23</time>发表</span><span class="level-item"><a class="link-muted" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><span> / </span><a class="link-muted" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a></span><span class="level-item">1 小时读完 (大约7948个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/posts/12577bd1/">AlexNet论文精读</a></h1><div class="content"><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/AlexNet/22689612?fr=aladdin">AlexNet</a>是2012年<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/ImageNet/17752829">ImageNet</a>竞赛冠军获得者Alex Krizhevsky、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%9D%B0%E5%BC%97%E9%87%8C%C2%B7%E8%BE%9B%E9%A1%BF/23419046?fr=aladdin">Hinton</a>（获2019图灵奖）和Ilya Sutskever（Alpha GO、TensorFlow的开发者）设计的。原论文名为<em><strong>ImageNet Classification with Deep Convolutional Neural Networks</strong></em>（使用深度神经网络对ImageNet进行图像分类），是计算机视觉领域最为经典的论文之一，引用量至今已达1.4万次，主要提出者Alex Krizhevsky是人工智能教父Hinton的学生，这三位作者被称为人工智能三巨头。</p>
+        gtag('config', 'UA-72437521-5');</script><!--!--><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"><script src="https://cdnjs.loli.net/ajax/libs/pace/1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="WilliamLeung的个人博客" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item is-active" href="/">主页</a><a class="navbar-item" href="/categories">按类别查看</a><a class="navbar-item" href="/tags">按标签查看</a><a class="navbar-item" href="/archives">按日期查看</a><a class="navbar-item" href="/posts/1/">关于</a></div><div class="navbar-end"><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-05-27T14:15:13.000Z" title="2022/5/27 22:15:13">2022-05-27</time>发表</span><span class="level-item"><a class="link-muted" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><span> / </span><a class="link-muted" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a></span><span class="level-item">34 分钟读完 (大约5161个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/posts/483895fb/">VGG论文精读</a></h1><div class="content"><h3 id="文章目录"><a href="#文章目录" class="headerlink" title="文章目录"></a>文章目录</h3><ul>
+<li>题目</li>
+<li>论文总览</li>
+<li>Part 1：论文导读</li>
+<li><ul>
+<li>研究背景</li>
+<li>研究成果</li>
+</ul>
+</li>
+<li>论文精读</li>
+<li><ul>
+<li>摘要</li>
+<li>论文小标题</li>
+<li>VGGNet 网络结构</li>
+<li>Classification Framework</li>
+<li><ul>
+<li>Training</li>
+<li>Testing</li>
+<li> Implementation Details</li>
+</ul>
+</li>
+<li>Classification Experiments</li>
+<li><ul>
+<li> Single Scale Evaluation</li>
+<li> Multi-Scale Evaluation</li>
+<li> Multi-Crop Evaluation</li>
+<li>Convent Fusion</li>
+<li>Comparison With The State Of The Art</li>
+</ul>
+</li>
+<li>论文总结</li>
+</ul>
+</li>
+</ul>
+<h1 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h1><p>  VggNet：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1409.1556">《Very Deep Convolutional Networks for Large-Scale Image Recognition》</a>，大规模图像识别的深度卷积网络。</p>
+<h1 id="论文总览"><a href="#论文总览" class="headerlink" title="论文总览"></a>论文总览</h1><p>  首先，读一篇论文，我们第一遍通常需要泛读，即读这篇论文的题目，摘要，各个部分的标题和小标题，以及图片和表格。</p>
+<p>  下面是泛读之后整理出该篇论文大致分成5个部分。</p>
+<p><img src="https://img-blog.csdnimg.cn/2020113013431598.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<h1 id="Part-1：论文导读"><a href="#Part-1：论文导读" class="headerlink" title="Part 1：论文导读"></a>Part 1：论文导读</h1><h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p>  VGGNet 这篇论文的主要贡献就是在于从网络<strong>深度</strong>这一角度出发，对卷积神经网络进行了改进。非常详细的评估了网络深度所带来的影响，证明了网络的深度对于性能的提升具有举足轻重的作用。而且由于文中训练的两个16层和19层的网络由于其强大的泛化能力，在之后得到了非常广泛的应用。</p>
+<blockquote>
+<p><strong>VGGNet 主要特点</strong>：</p>
+<ul>
+<li>网络很深</li>
+<li>卷积层中使用的卷积核很小，且都是3*3的卷积核</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="研究成果"><a href="#研究成果" class="headerlink" title="研究成果"></a>研究成果</h2><p>  VGGNet 在2014年的 ImageNet Challenge 中获得了分类任务的第二名和定位任务的第一名。而且在分类任务中，只和获得冠军的 GoogLeNet 只相差了 0.1%，而且在单个网络中，VGG 是表现最好的，误差是 7.0%，比 GoogLeNet 的 7.9% 高了 0.9 个百分点。<br><img src="https://img-blog.csdnimg.cn/2020113014022218.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<h1 id="Part-2：论文精读"><a href="#Part-2：论文精读" class="headerlink" title="Part 2：论文精读"></a>Part 2：论文精读</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>下面，我们先来看看摘要。<br><img src="https://img-blog.csdnimg.cn/20201130141052968.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><strong>我们可以将摘要总结如下：</strong></p>
+<ul>
+<li>这篇论文主要研究的是卷积神经网络深度对分类准确度的影响</li>
+<li>我们整个网络都使用 3*3 的卷积核，成功将深度扩大了16-19层，并且得到了一个很好的效果</li>
+<li>VGGNet 获得了2014年 ImageNet Challenge 的定位任务第一名和分类任务第二名</li>
+<li>该模型的泛化能力很强，运用到其它数据集上也得到了很好的效果</li>
+<li>表现最好的两个模型已经投入到未来的研究中</li>
+</ul>
+<hr>
+<h2 id="论文小标题"><a href="#论文小标题" class="headerlink" title="论文小标题"></a>论文小标题</h2><p><img src="https://img-blog.csdnimg.cn/20201130142347738.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>  从小标题的个数可以看出，第4部分的子标题最多，我们应该重点关注，其次应该关注第2、3部分。</p>
+<p>  当我们正式进入某一部分时，我们可以先看一下，该部分有没有 Overall、Conclusion、Discussion等等。或许我们先从该部分入手，先了解到该部分的大体内容，再返回去看具体的实现细节。</p>
+<p>  那么我们先从网络的架构（Configurations）入手，从上面的小标题可以看出，我们可以先从 2.3 小节入手。</p>
+<hr>
+<h2 id="2-VGGNet-网络结构"><a href="#2-VGGNet-网络结构" class="headerlink" title="2. VGGNet 网络结构"></a>2. VGGNet 网络结构</h2><p>我们先看 2.3 的 discussion。<br><img src="https://img-blog.csdnimg.cn/20201130143623572.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><strong>可以从上面一段文字总结如下：</strong></p>
+<ol>
+<li>整个神经网络都是使用的 3*3的卷积核</li>
+<li>通过堆叠多个3<em>3的卷积核来代替大尺度卷积核，堆积2个3</em>3的卷积代替一个5<em>5的卷积，堆叠3个3</em>3的卷积代替一个7*7的卷积</li>
+<li>这样做的好处：不仅能使决策函数更有区别，而且使得参数大大减少</li>
+</ol>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20201130144421507.png" alt="在这里插入图片描述"></p>
+<p>  <strong>可以从上面一段文字总结如下：</strong> 使用 1*1 的卷积可以在不影响卷积层的结果的情况下增加决策函数的非线性。</p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20201130145042462.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>  <strong>可以从上面一段文字总结如下：</strong> 这次比赛的冠军 GoogLeNet 也使用了非常深的网络（22层）和小的卷积核（1<em>1，3</em>3，5*5）。它们使用为了减少计算量，设计更为复杂，更积极地减少了第一层的特征图的空间分布。但是从单个网络的分类准确率来看，VGGNet 的表现要优于 GoogLeNet。</p>
+<hr>
+<p>接下来，我们再来看 2.3 小节中的图。<br><img src="https://img-blog.csdnimg.cn/20201130160204333.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>  <br>  在实验中，一共尝试了上面六种模型（每一列是一种模型），模型中都使用了是 3x3 的卷积核大小，在模型 C 中尝试了 1x1 的卷积核，模型的深度从左向右依次增加。为了简洁方便，表格中只展示了卷积操作和池化操作，没有显示激活函数（在每个卷积层和全连接层后都有激活函数）。而且我们发现每层的通道数很小，第一层的通道数只有64，之后每进行一次最大池化，通道数变为之前的2倍，直到增加到512为止。</p>
+<p>  下面是16层的 VGGNet 的模型图。<br><img src="https://img-blog.csdnimg.cn/20201130214328120.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><strong>图中符号表示：</strong></p>
+<ul>
+<li>conv3-64：卷积核的大小为 3*3，输出通道数为 64</li>
+<li>conv1-256：卷积核大小为 1*1，输出通道数为 256</li>
+<li>FC-4096：全连接层，输出神经元个数为 4096</li>
+<li>FC-1000：全连接层，输出神经元个数为 1000</li>
+<li>maxpool：采用最大池化</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20201130161358641.png" alt="在这里插入图片描述"></p>
+<p>  关于Table 2 的描述，在 2.2 小节中，我们来看看 2.2 小节。<br><img src="https://img-blog.csdnimg.cn/20201130162326973.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>  Table 2 展示了上面六种模型中的参数个数，从 Table 1 中，我们知道模型的深度是从11层增加到了19层，尽管深度很深，但是网络的权重的数量是不大于一个更浅更宽的网络的。</p>
+<p>  最后我们在来看看整体网络的架构（2.1）。<br><img src="https://img-blog.csdnimg.cn/20201130163021146.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>从上面几段话，可以<strong>总结如下</strong>：</p>
+<ol>
+<li>每个模型的输入都是 224x224 大小的RGB图片，而且需要在训练集上进行正则化。</li>
+<li>在卷积层中使用的是 3x3 的卷积核，在模型 C 中使用了 1x1 的卷积核</li>
+<li>六个模型都有5个最大池化层，并且池化层中使用的都是 2x2 的卷积核，并且 stride 为 2</li>
+<li>所有的隐藏层都有激活函数</li>
+<li>LRN（局部响应正则化）不能改善性能，反而会导致增加内存消耗和时间消耗</li>
+</ol>
+<hr>
+<h2 id="3-Classification-Framework"><a href="#3-Classification-Framework" class="headerlink" title="3. Classification Framework"></a>3. Classification Framework</h2><p>  下面我们接着看第3节，该节主要描述的是网络中训练和评估的细节。我们先从 3.1 的 Training 开始。</p>
+<h3 id="3-1-Training"><a href="#3-1-Training" class="headerlink" title="3.1 Training"></a>3.1 Training</h3><p><img src="https://img-blog.csdnimg.cn/20201130191846679.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>以上几段主要介绍了在训练过程中参数的设置以及初始化，以及扩充数据集的方法。总结如下：</p>
+<ul>
+<li>batch_size = 256</li>
+<li>momentum = 0.9</li>
+<li>L 2 L_2<em>L</em>2 正则项：5 ⋅ 1 0 − 4 5·10^{-4}5⋅10−4</li>
+<li>dropout：p = 0.5</li>
+<li>learning rate：0.01（当验证集准确度不变时，learning rate 变为原来的 1/10）</li>
+<li>随机初始化权重，然后用模型 A 进行训练，然后将优化后得到的权重作为更深层的网络的前4层卷积层和最后3个全连接层的初始化权重，并且这些层的学习率不进行衰减。其余层进行进行随机初始化，权重初始化为均值为0，方差为0.01的正态分布，偏差为0。</li>
+<li>但是他们在论文提交之后发现，可以不用上面的方法初始化权重，直接使用 Glorot &amp; Bengio(2010) 的随机初始化程序就能得到很好的效果。下面是 Glorot &amp; Bengio 的初始化方法。<br><img src="https://img-blog.csdnimg.cn/20201130211948621.png" alt="在这里插入图片描述"></li>
+<li>他们使用随即裁剪的方式将输入的图片大小固定在 224x224。为了扩充数据集，采用<strong>随机水平翻转和随机RGB颜色扰动</strong></li>
+</ul>
+<p>下面是对于训练图片大小的设置。<br><img src="https://img-blog.csdnimg.cn/20201130193034861.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>上面采取了两种方法来设置训练图片的大小 S。</p>
+<ol>
+<li>第一种方法：<strong>固定 S</strong>，在实验中，评估模型用了两种图片大小：256 和 384。第一次训练固定图像大小 S = 256，为了加快 S = 384 的网络，将 S = 256 模型训练得到的参数作为 S = 384 模型的初始化权重，初始化学习率为 0.001</li>
+<li>第二种方法：<strong>多尺度的训练</strong>。不固定训练图片的大小，将其固定在一个范围中 [256, 512]，在训练时，考虑到不同尺度的图片作为训练集训练网络对训练是有益的，也可以看做通过尺度抖动增加训练数据集。这样训练出来的模型可以识别各种大小的图片，由于速度方面的原因，我们训练多尺度模型的方法是对相同配置的单尺度模型的所有层进行微调，预先用固定的S = 384进行训练。</li>
+</ol>
+<h3 id="3-2-Testing"><a href="#3-2-Testing" class="headerlink" title="3.2 Testing"></a>3.2 Testing</h3><p>下面让我们来看一下测试数据集。<br><img src="https://img-blog.csdnimg.cn/20201130205155712.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><strong>总结如下：</strong></p>
+<ol>
+<li>用一张测试图片的不同大小进行测试，最后取这些结果的平均值作为该图片的结果，这样也会改善性能。</li>
+<li>在最后一个卷积层的最后我们需要做一个最大/平均池化，为了使得能够和全连接层连接上，所以需要将最后一个卷积层的输出进行规定。</li>
+</ol>
+<p>  举个栗子：假设输入的图片大小为 224x224x3，那么最后一个卷积层的输出为 7x7x512。那么如果输入图片大小为 448x448x3，那么最后一个卷积层的输出为 14x14x512。这样两个不同的尺度就不能连接同一个全连接层，所以需要对最后一个卷积层的输出做一个规定大小。那么只需要对他们做一个均值（最大）池化操作，7x7x512 池化之后就是 512，14x14x512 池化之后也是 512，这样就能与全连接层相连接了。</p>
+<p><img src="https://img-blog.csdnimg.cn/20201130214450657.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ol>
+<li>通过<strong>水平翻转图像增加扩充测试数据集</strong>，最后将原始图片和翻转后的图片的结果平均值作为该图片的最终结果。</li>
+<li>我们在评估网络时，把每张图片变为3个尺寸，从每个尺寸的图片中随即裁剪出50个不同的图片，然后一张图片就变成了150张图片
+  </li>
+</ol>
+<h3 id="3-3-Implementation-Details"><a href="#3-3-Implementation-Details" class="headerlink" title="3.3 Implementation Details"></a>3.3 Implementation Details</h3><p>最后我们再来看看实现细节（3.3）<br><img src="https://img-blog.csdnimg.cn/20201130220235636.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><strong>总结：</strong></p>
+<p>  网络进行训练和评价以及训练和评估全尺寸多尺度图像都是使用一个系统上的多个 GPU 。多 GPU 训练利用数据并行性，将每批训练图像分割成若干 GPU 批次，在每个GPU上并行处理。计算完 GPU 批处理梯度后，取其平均值，得到整个批处理的梯度。梯度计算是同步的跨 GPU，因此结果和单一 GPU 训练是完全相同的。</p>
+<p>   网络在4个 NVIDIA Titan Black GPUs 训练单个网络花费了 2-3 周。</p>
+<hr>
+<h2 id="4-Classification-Experiments"><a href="#4-Classification-Experiments" class="headerlink" title="4. Classification Experiments"></a>4. Classification Experiments</h2><p>  在第4节中，主要呈现了在 ILSVRC-2012 数据集上的分类结果，分类表现主要有两种评价指标：top-1 and top-5 errro，top-5 error 是 ILSVRC 的主要评价指标。</p>
+<h3 id="4-1-Single-Scale-Evaluation"><a href="#4-1-Single-Scale-Evaluation" class="headerlink" title="4.1 Single Scale Evaluation"></a>4.1 Single <a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=Scale&spm=1001.2101.3001.7020">Scale</a> Evaluation</h3><p>  单尺度评估。首先我们来看看4.1小节给出的表格。<br><img src="https://img-blog.csdnimg.cn/20201201074414455.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>  对于模型 A，A-LRN，B，它们都采用的是固定 S = 256，并且我们发现模型 A-LRN 的表现还没有模型 A 好，所以对于后面的模型，都没有使用 LRN（局部响应正则化），但是我们观察到从模型 A 到模型 B，<strong>随着深度的增加，top-1 和 top-5 error 也在下降</strong>。</p>
+<p>  再来观察模型 C、D、E，它们的 train 都测试了3种图片尺度，分别是 S=256，S=384，S=[256;512]。我们只看三个模型的 S=256 和 S=384，我们很容易发现不管哪一种模型，当 S=384，其模型的 top-1 和 top-5 是要优于 S=256 的。那是因为<strong>图片的分辨率越高，我们能够更容易捕捉到一些空间特征，所以其分类准确度就越高</strong>。</p>
+<p>  最后，我们再来看看的三种模型的 S=[256;512] 的这种情况，我们很容易发现这种情况的分类结果不管在哪一种模型中都是表现最好的。这也证明了<strong>通过尺度来扩充训练集确实有助于捕获多尺度图像统计</strong>。</p>
+<h3 id="4-2-Multi-Scale-Evaluation"><a href="#4-2-Multi-Scale-Evaluation" class="headerlink" title="4.2 Multi-Scale Evaluation"></a>4.2 Multi-Scale Evaluation</h3><p>  多尺度评估。主要评估在测试阶段尺度抖动对分类准确度影响。当用固定图片大小S进行训练得到的模型，会用一张测试图片的三种尺寸大小进行评估，那么三种图片大小分别为：S-32，S，S+32。当训练时不是使用的固定 S 进行训练，S 是一个变量，属于 [S m i n S_{min}<em>S<strong>m</strong>i**n</em>, S m a x S_{max}<em>S<strong>m</strong>a**x</em>]，那么我们在评估时，测试图片的大小分别是：S m i n S_{min}<em>S<strong>m</strong>i**n</em>, 0.5 ( S m i n + S m a x ) 0.5(S_{min} + S_{max})0.5(<em>S<strong>m</strong>i**n</em>+<em>S<strong>m</strong>a**x</em>), S m a x S_{max}<em>S<strong>m</strong>a**x</em>。</p>
+<p>  评估结果如下：<br><img src="https://img-blog.csdnimg.cn/20201201082352597.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>  根据表格我们可以得出结论：在<strong>测试阶段的尺度抖动相较于单尺度的相同模型会有更好的表现</strong>。其中模型 D 和 E 表现最好。表现最好的单个网络在验证数据集上 top-1 和 top-5 error 达到了 24.8%/7.5%，在测试数据集上，模型 E 达到了 7.3 % 的 top-5 error。</p>
+<h3 id="4-3-Multi-Crop-Evaluation"><a href="#4-3-Multi-Crop-Evaluation" class="headerlink" title="4.3 Multi-Crop Evaluation"></a>4.3 Multi-Crop Evaluation</h3><p>  多裁剪评估。这里主要用到两种评估方法，一种是 dense，即评估时所使用的图片是整张图片，不经过任何裁剪。那么另一种就是 multi-crop，就是评估时使用的是裁剪后的图片。评估结果如下表：<br><img src="https://img-blog.csdnimg.cn/20201201083757438.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>  从评估结果来看，<strong>使用 multi-crop 要比使用 dense 的表现稍微好一些</strong>，而且两种方法结合使用的表现比单独使用任何一种方法的效果都要好，因为两种方法是互补的。
+  </p>
+<h3 id="4-4-Convent-Fusion"><a href="#4-4-Convent-Fusion" class="headerlink" title="4.4 Convent Fusion"></a>4.4 Convent Fusion</h3><p>  模型融合。通过融合几种模型，最后取各个模型的 soft-max 结果的平均值作为模型的输出。下面是融合不同模型得到的实验结果。<br><img src="https://img-blog.csdnimg.cn/20201201084753151.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>  可以从实验结果发现，融合一个模型 D 和模型 E ，并且在评估时使用 multi-crop 和 dense 的方法得到的表现最好。</p>
+<p>  </p>
+<h3 id="4-5-Comparison-With-The-State-Of-The-Art"><a href="#4-5-Comparison-With-The-State-Of-The-Art" class="headerlink" title="4.5 Comparison With The State Of The Art"></a>4.5 Comparison With The State Of The Art</h3><p>  主要是和 ILSVRC 比赛中表现比较好的模型进行比较，下表是在挑战赛中表现比较好的模型。<br><img src="https://img-blog.csdnimg.cn/20201201085309296.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>  在 2014 年的挑战赛中，GoogLeNet 以 6.7% 的 error 夺冠，VGGNet 以 6.8% 的 error 获得第二名。但是如果从一个网络的分类准确度来看，VGG 是以 7.0% 的 error 要优于 GoogLeNet 的 7.9%。</p>
+<hr>
+<h2 id="论文总结"><a href="#论文总结" class="headerlink" title="论文总结"></a>论文总结</h2><p>  在研究完每篇论文之后，我们都需要做一个总结。</p>
+<p>  那么我们先来看一下这篇论文的总结是什么?<br><img src="https://img-blog.csdnimg.cn/20201201090134263.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>再次强调了<strong>深度确实能够增加分类准确度</strong>。</p>
+<hr>
+<p>下面就来进行自我总结。</p>
+<p><strong>创新点</strong></p>
+<ul>
+<li>整个网络都采用 3x3 的卷积核，从而增加神经网络的深度。两个3x3卷积核的堆叠代替一个5x5卷积核，三个3x3卷积核代替一个7x7卷积核。这样一方面能够减少参数的数量，另一方面拥有更多的非线性变化。</li>
+<li>在卷积结构中引入1x1的卷积核，在不影响输入输出维度的情况下，引入非线性变换，增加网络的表达能力，降低计算量</li>
+<li>通过预训练的方式来更好的初始化权重，加快训练的收敛速度</li>
+<li>采用 Multi-Scale 的方式训练和预测，可以扩充数据集，防止过拟合，提升预测准确率。</li>
+<li>深层网络更适合于大的数据集</li>
+</ul>
+<p><strong>启发点</strong></p>
+<ul>
+<li>深度能够提高网络的分类准确率</li>
+<li>为了加快收敛速度，可以使用预训练的方式初始化权重</li>
+<li>在更深层的网络中，LRN方法并没有什么用，反而会导致内存和时间的消耗</li>
+<li>通过堆叠小卷积核可以减少网络参数，增加网络深度，提升网络性能</li>
+<li>在训练和测试使用 Multi-Scale 可以扩充数据集，防止过拟合</li>
+</ul>
+<hr>
+<p> </p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-09-22T19:21:43.000Z" title="2021/9/23 03:21:43">2021-09-23</time>发表</span><span class="level-item"><a class="link-muted" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><span> / </span><a class="link-muted" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a></span><span class="level-item">31 分钟读完 (大约4676个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/posts/12577bd1/">AlexNet论文精读</a></h1><div class="content"><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/AlexNet/22689612?fr=aladdin">AlexNet</a>是2012年<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/ImageNet/17752829">ImageNet</a>竞赛冠军获得者Alex Krizhevsky、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%9D%B0%E5%BC%97%E9%87%8C%C2%B7%E8%BE%9B%E9%A1%BF/23419046?fr=aladdin">Hinton</a>（获2019图灵奖）和Ilya Sutskever（Alpha GO、TensorFlow的开发者）设计的。原论文名为<em><strong>ImageNet Classification with Deep Convolutional Neural Networks</strong></em>（使用深度神经网络对ImageNet进行图像分类），是计算机视觉领域最为经典的论文之一，引用量至今已达1.4万次，主要提出者Alex Krizhevsky是人工智能教父Hinton的学生，这三位作者被称为人工智能三巨头。</p>
 <p>因为AlexNet的提出，使得那一年之后，更多的更深的神经网络被提出，比如优秀的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/VGG%20%E6%A8%A1%E5%9E%8B/22689655?fr=aladdin">VGG</a>,<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/GoogLeNet/22689587">GoogLeNet</a>，他们都是基于AlexNet的深度卷积神经网络来提取图像特征的。尽管AlexNet是2012年提出的模型，在如今已经有了更多的更优秀的模型，但是他们都是从AlexNet中得到启发。其首次将深度学习应用在大规模的图像分类上，在当时在产业界和学术界引发了很大的轰动。之后不管是图像分类，目标检测、语义分割都是在AlexNet的基础之上，AlexNet奠定了计算机视觉深度学习的基本模型方法和技巧。所以我认为AlexNet是学习计算机视觉必须了解的一个模型。</p>
-<p>今天我将通过精读这篇论文原文的方式去了解AlexNet的一些基本思想和原理。</p>
+<p>今天我将通过精读这篇论文原文的方式去了解AlexNet的一些基本思想和原理，下面我主要通过下面四个方面来对这篇论文进行精读。</p>
+<ol>
+<li>AlexNet 网络结构及参数计算</li>
+<li>AlexNet 网络特色及训练技巧</li>
+<li>实验设置及结果分析</li>
+<li>论文总结</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/20201124162846687.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 <p>AlexNet论文链接：<a target="_blank" rel="noopener" href="http://www.cs.toronto.edu/~fritz/absps/imagenet.pdf">http://www.cs.toronto.edu/~fritz/absps/imagenet.pdf</a></p>
-<h2 id="论文精读"><a href="#论文精读" class="headerlink" title="论文精读"></a>论文精读</h2><h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p><img src="/posts/12577bd1/image-20210923002137048.png" alt="image-20210923002137048"></p>
-<p>在此处，作者讲述了他们训练了一个又大又深的卷积神经网络去对120万个高分辨率的图像进行了1000个类别的分类。在测试数据集中，他们达到了TOP1错误率37.5%、TOP5错误率17%，是当年最先进的成果，在这个神经网络中有6000万个参数和65万个神经元，有五个卷积层，他们中有些后面跟着池化层，在之后是三个全连接层（一千个分类的线性分类，）最后是softmax归一化。为了更快的训练这个网络，他们用了一个不饱和的激活函数，以及两个GPU并行的方法。为了减少过拟合，他们用了一个他们最近提出的且在当时十分有效的正则化方法：dropout。在2012年的ILSVRC的比赛中取得了TOP5错误率15.3%的好成绩（第二名TOP5错误率为26.2%）</p>
-<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p><img src="/posts/12577bd1/image-20210923003814300.png" alt="image-20210923003814300"></p>
-<p><img src="/posts/12577bd1/image-20210923003832644.png" alt="image-20210923003832644"></p>
-<p>当前的图像识别方法都会使用机器学习方法。为了提高它们的性能，我们可以收集更大的数据集，学习更强大的模型，并使用更好的技术来防止过度拟合。直到最近（2012年），标记图像的数据集相对<br>小——大约有数万张图像（例如 纽约大学的NORB [16]数据集、加州理工的Caltech-101/256 [8, 9] 和<br>加拿大高等研究院CIFAR-10/100 [12])。使用这种大小的数据集可以很好地解决简单的识别任务，<br>特别是当它们采用图像增强的方法去保留一些标签时。例如，MNIST 手写识别在2012年的最佳错误率低于0.3% 已经接近人类表现 。但是现实世界中的数据集是完全不同的，（如CIFAR是32x32x3的分辨率，而现在的图片通常分辨率都是1024以上）。因此要学会识别它们是需要使用更大的训练集。其实，小图像数据集的缺点已被学者广泛了解，但直到最近才有了具有了收集数百万张图像的标记数据集。比如说 LabelMe ，以及由数十万张完全分割的图像（包括超过 22,000 个类别的超过 1500 万张标记的高分辨率图像）组成的ImageNet 。<br>要从数百万张图像中了解数千个对象，我们需要一个具有大量学习能力的模型。然而，图像识别任务的巨大且复杂，所以我们的模型也应该有很多的先验知识来弥补我们没有的所有数据。卷积神经网络<br>(CNNs) 就构成了这样一个模型 。他们的学习能力可以通过改变他们的深度（网络层数）和宽度（每一层里卷积核的个数）来控制，他们也做出了强有力的、基本正确的图像推断。因此，与具有类似大小层的标准前馈神经网络相比，CNN 具有更少的连接和参数，因此它们更容易训练，而它们理论上最好的性能可能只会稍微差一点。<br>尽管 CNN 非常的好，尽管它们的局部连接是很高效的，但将它们大规模应用的成本也很高。幸运的是，当前的 GPU 有了高度优化的2维卷积实现，它功能的强大足以应用大型 CNN ，并且最近的数据集（如 ImageNet）也包含足够的标记示例来训练此类模型，而不会出现严重的过拟合。<br>本文的具体贡献如下：我们训练了ILSVRC-2010 和 ILSVRC-2012 中使用的最大的卷积神经网络， 并取得了迄今为止最好的成绩。我们写了一个高度优化 GPU 实现训练卷积神经网络，并开源了代码。我们的模型包含许多新的和不寻常的特征以提高其性能并减少其训练时间，会在第 3 节详述。因为我们的模型深度很深，即使有 120 万个带标签的训练示例，我们的模型仍然容易过拟合，因此我们使用了几种有效的技术来防止过拟合，这在第 4 节中描述。我们的最终网络包含五个卷积层和三个全连接层，而且它们的深度很重要：我们发现删除任何<br>卷积层（每个包含不超过模型参数的 1%），都会导致性能变得比较差。<br>最后，网络的大小主要受当前 GPU 上可用内存量的限制以及我们愿意容忍的训练时间。我们的网络需要五到六天<br>在两个 GTX 580 3GB GPU 上训练。我们所有的实验都表明：我们的结果可以简单地通过以后研发的更快的 GPU 和更大的数据集来进行更好的优化。</p>
-<h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><p><img src="/posts/12577bd1/image-20210923013339135.png" alt="image-20210923013339135"></p>
-<p>ImageNet 是一个包含超过 1500 万张标记过的高分辨率图像的数据集，这些图像属于大约 分为22,000<br>个类别。这些图像是从网络上收集的，并由人工标注，使用的是亚马逊的 Mechanical Turk 众包工具进行标记。从 2010 年开始，一项名为 ImageNet 大规模视觉识别挑战赛的年度竞赛(ILSVRC)被作为 Pascal Visual Object 的一部分举行。 ILSVRC 使用的是 ImageNet 的一个子集，每个子集大约有 1000 个图像，分为1000个类别。总共有大约 120 万张训练图像、50,000 张验证图像和150,000 张测试图像。<br>ILSVRC-2010 是唯一测试集标签公开的 ILSVRC 比赛，所以我们大部分实验都在此比赛进行。我们也参加了 ILSVRC-2012 竞赛，在第 6 节中，我们汇报这次比赛的结果。在 ImageNet 上，习惯上有两种错误率评判标准：<br>top-1 和 top-5，其中 top-1是预测的第一个标签正确的情况，top-5 是前五个预测标签里包含正确结果的情况。<br>ImageNet 由不同的分辨率的图像组成，而我们的模型需要固定分辨率的方形图像。因此，我们将图像下采样到 256 × 256 的固定分辨率。<br>例如一张矩形图像，我们首先重新缩放图像，使短边的长度为 256，然后从结果图像中裁剪出中央 256×256 块，计算出每个像素的均值并减去对应的均值（类似于中心化）。除了从每个像素中裁剪以外，我们没有以任何其他方式预处理过图像。所以，我们是用以0为均值的RGB图片来训练的。</p>
-<h3 id="该网络的架构"><a href="#该网络的架构" class="headerlink" title="该网络的架构"></a>该网络的架构</h3><p><img src="/posts/12577bd1/image-20210923013428274.png" alt="image-20210923013428274"></p>
-<p>图 2 是我们网络的架构的总结。它包含八个学习层——五个卷积和三个全连接。 下面，我们讲述一些我们网络架构新颖或不寻常的的特点。 第 3.1-3.4 节是根据我们对它们的重要性排布的，最重要的放在最前面。</p>
-<h4 id="ReLU函数"><a href="#ReLU函数" class="headerlink" title="ReLU函数"></a>ReLU函数</h4><p><img src="/posts/12577bd1/image-20210923014218146.png" alt="image-20210923014218146"></p>
-<p>我们之前通常把<img src="/posts/12577bd1/image-20210923014813591.png" alt="image-20210923014813591">或<img src="/posts/12577bd1/image-20210923014853512.png" alt="image-20210923014853512">作为激活函数。就梯度下降的训练时间而言，这些饱和非线性的激活函数比非饱和非线性激活函数慢得多，而我们用的带有 ReLU<img src="/posts/12577bd1/image-20210923015752004.png" alt="image-20210923015752004"> 的深度卷积神经网络的训练速度比双曲线激活函数<img src="/posts/12577bd1/image-20210923014813591.png" alt="image-20210923014813591">它们的快几倍。比如在<br>图 1，具有 ReLU 的四层卷积神经网络在 CIFAR-10 上达到 25% 的训练错误率比具有 tanh 神经元的等效网络快六倍。这表明如果我们使用传统的激活函数将无法在如此大的神经网络上使用。<br>我们并不是第一个考虑替代 CNN 中替换掉激活函数的人。例如，贾勒特用双曲线激活函数的绝对值 <img src="/posts/12577bd1/image-20210923020622116.png" alt="image-20210923020622116">在Caltech-101 数据集上配合局部平均池化后的效果比较好。然而，在这个数据集上，主要目的是防止过拟合，他们观察到的效果与我们在使用 ReLU 时报告的适应训练集的加速能力不同。快速训练对在大型数据集上训练的大型模型的性能有很大影响。</p>
-<p>图 1：具有 ReLU 的四层卷积神经网络（实线）在 CIFAR-10 上达到 25% 的训练错误率，比具有 tanh 神经元的等效网络（虚线）快六倍。 每个网络的学习率都是独立选择的，以使训练尽可能快。 没有采用任何形式的正则化。 这里展示的效果的大小因网络架构而异，但使用 ReLU 的激活函数始终比使用饱和的激活函数学习速度快几倍。</p>
-<h4 id="多GPU训练"><a href="#多GPU训练" class="headerlink" title="多GPU训练"></a>多GPU训练</h4><p><img src="/posts/12577bd1/image-20210923021540781.png" alt="image-20210923021540781"></p>
-<p>在当时，单个 GTX 580 GPU 只有 3GB 的内存，这限制了可以在其上训练的网络的最大大小。根据反向传播原理，显存中不仅存储模型参数，还需储存正向传播时每一层整个batch的中间结果。因此，我们将网络分布在两个 GPU 上。当前的 GPU 是可以跨 GPU 并行化，因为它们能够直接读取和写入彼此的内存，而无需经过主机内存。我们采用的并行化方案本质上是将一半的内核（或神经元）放在每个 GPU 上，GPU 仅在某些层中进行通信。例如，第 3 层的内核从第 2 层的所有内核映射中获取输入，第 4 层中的内核仅从位于同一 GPU 上的第 3 层内核映射中获取输入。我们选择交叉验证，这能使我们精确地调整通信量，直到它是达到十分合适的效果。由此产生架构的除了我们的列不是独立的以外，有点类似于“柱状”CNN 的架构。与在一个 GPU 上训练的每个卷积层中内核数量减半的网络相比，该方案分别将我们的 top-1 和 top-5 错误率降低了 1.7% 和 1.2%。且双 GPU 神经网络的训练时间比单 GPU 神经网络所需的时间短。</p>
-<h4 id="局部响应归一化"><a href="#局部响应归一化" class="headerlink" title="局部响应归一化"></a>局部响应归一化</h4><p><img src="/posts/12577bd1/image-20210923022923258.png" alt="image-20210923022923258"></p>
-<p><code>ReLU</code>具有让人满意的特性，它不需要通过输入归一化来防止饱和。如果至少一些训练样本对<code>ReLU</code>产生了正输入，那么那个神经元上将发生学习。然而，我们仍然发现接下来的局部响应归一化有助于泛化。通过下式给定式：</p>
-<p><img src="/posts/12577bd1/image-20210923022747038.png" alt="image-20210923022747038"></p>
-<p>求和运算在<code>n</code>个“毗邻的”核映射的同一位置上执行，N是本层的卷积核数目。核映射的顺序当然是任意的，在训练开始前确定。响应归一化的顺序实现了一种侧抑制形式，灵感来自于真实神经元中发现的类型，为使用不同核进行神经元输出计算的较大活动创造了竞争。常量<code>k，n，α，β</code>是超参数，它们的值通过验证集确定；我们设<code>k=2，n=5，α=0.0001，β=0.75</code>。我们在特定的层使用的<code>ReLU</code>非线性之后应用了这种归一化（请看3.5小节）。</p>
-<p>这个方案与Jarrett等人[11]的局部对比度归一化方案有一定的相似性，但我们更恰当的称其为“亮度归一化”，因此我们没有减去均值。响应归一化分别减少了<code>top-1 1.4%</code>，<code>top-5 1.2%</code>的错误率。我们也在CIFAR-10数据集上验证了这个方案的有效性：一个乜嘢归一化的四层CNN取得了13%的错误率，而使用归一化取得了11%的错误率。</p>
-<h4 id="重叠池化"><a href="#重叠池化" class="headerlink" title="重叠池化"></a>重叠池化</h4><p><img src="/posts/12577bd1/image-20210923023032690.png" alt="image-20210923023032690"></p>
-<p>CNN中的池化层归纳了同一核映射上相邻组神经元的输出。习惯上，相邻池化单元归纳的区域是不重叠的（例如[17, 11, 4]）。更确切的说，池化层可看作由池化单元网格组成，池每个像素网格总结了池单元位置处<code>size z× z centered</code>的邻域。如果我们设置<code>=z</code>，我们将获得传统的本地池，作为CNNs中的常用池。如果我们设置<code>&lt; z</code>，我们获得重叠池。这是我们在整个网络中使用的，<code>s = 2，z= 3</code>。与产生等效尺寸输出的非重叠方案<code>s= 2，z= 2</code>相比，该方案将前1和前5的错误率分别降低<code>0.4%</code>和<code>0.3%</code>。我们通常在训练中观察到，过度汇集的模型会发现稍微更难过度汇集相比，输出的维度是相等的。我们在训练过程中通常观察采用重叠池化的模型，发现它更难过拟合。</p>
-<h4 id="整体架构"><a href="#整体架构" class="headerlink" title="整体架构"></a>整体架构</h4><p><img src="/posts/12577bd1/image-20210923023120315.png" alt="image-20210923023120315"><img src="/posts/12577bd1/image-20210923023136267.png" alt="image-20210923023136267"></p>
-<p>现在我们准备描述我们的CNN的整体架构。如图2所示，我们的网络包含8个带权重的层；前5层是卷积层，剩下的3层是全连接层。最后一层全连接层的输出是1000维softmax的输入，softmax会产生1000类标签的分布。我们的网络最大化多项逻辑回归的目标，这等价于最大化预测分布下训练样本正确标签的对数概率的均值。</p>
-<p>第2，4，5卷积层的核只与位于同一GPU上的前一层的核映射相连接（看图2）。第3卷积层的核与第2层的所有核映射相连。全连接层的神经元与前一层的所有神经元相连。第1，2卷积层之后是响应归一化层。3.4节描述的这种最大池化层在响应归一化层和第5卷积层之后。ReLU非线性应用在每个卷积层和全连接层的输出上。</p>
-<p>第1卷积层使用96个核对224 × 224 × 3的输入图像进行滤波，核大小为11 × 11 × 3，步长是4个像素（核映射中相邻神经元感受野中心之间的距离）。第2卷积层使用用第1卷积层的输出（响应归一化和池化）作为输入，并使用256个核进行滤波，核大小为5 × 5 × 48。第3，4，5卷积层互相连接，中间没有接入池化层或归一化层。第3卷积层有384个核，核大小为3 × 3 × 256，与第2卷积层的输出（归一化的，池化的）相连。第4卷积层有384个核，核大小为3 × 3 × 192，第5卷积层有256个核，核大小为3 × 3 × 192。每个全连接层有4096个神经元。</p>
-<h3 id="减少过拟合"><a href="#减少过拟合" class="headerlink" title="减少过拟合"></a>减少过拟合</h3><p><img src="/posts/12577bd1/image-20210923023231423.png" alt="image-20210923023231423"></p>
-<p>我们的神经网络架构有6000万参数。尽管<code>ILSVRC</code>的1000类使每个训练样本从图像到标签的映射上强加了10比特的约束，但这不足以学习这么多的参数而没有相当大的过拟合。下面，我们会描述我们用来克服过拟合的两种主要方式。</p>
-<h4 id="数据增强"><a href="#数据增强" class="headerlink" title="数据增强"></a>数据增强</h4><p><img src="/posts/12577bd1/image-20210923023330481.png" alt="image-20210923023330481"></p>
-<p><img src="/posts/12577bd1/image-20210923023407495.png" alt="image-20210923023407495"></p>
-<p>图像数据上最简单常用的用来减少过拟合的方法是使用标签保留变换（例如[25, 4, 5]）来人工增大数据集。我们使用了两种独特的数据增强方式，这两种方式都可以从原始图像通过非常少的计算量产生变换的图像，因此变换图像不需要存储在硬盘上。在我们的实现中，变换图像通过CPU的Python代码生成，而此时GPU正在训练前一批图像。因此，实际上这些数据增强方案是计算免费的。</p>
-<p>第一种数据增强方式包括产生图像变换和水平翻转。我们从256×256图像上通过随机提取<code>224 × 224</code>的图像块实现了这种方式，然后在这些提取的图像块上进行训练。这通过一个2048因子增大了我们的训练集，尽管最终的训练样本是高度相关的。没有这个方案，我们的网络会有大量的过拟合，这会迫使我们使用更小的网络。在测试时，网络会提取5个<code>224 × 224</code>的图像块（四个角上的图像块和中心的图像块）和它们的水平翻转（因此总共10个图像块）进行预测，然后对网络在10个图像块上的softmax层进行平均。</p>
-<p>第二种数据增强方式包括改变训练图像的RGB通道的强度。具体地，我们在整个ImageNet训练集上对RGB像素值集合执行PCA。对于每幅训练图像，我们加上多倍找到的主成分，大小成正比的对应特征值乘以一个随机变量，随机变量通过均值为0，标准差为0.1的高斯分布得到。因此对于每幅RGB图像像素<br>I x y = [ I x y R , I x y G , I x y B ] T I_{xy}=[I^R_{xy},I^G_{xy},I^B_{xy}]^T<em>I<strong>x</strong>y</em>​=[<em>I<strong>x</strong>y**R</em>​,<em>I<strong>x</strong>y**G</em>​,<em>I<strong>x</strong>y**B</em>​]<em>T</em>，我们加上下面的数量：<br>[ p 1 , p 2 , p 3 ] [ α 1 λ 1 , α 2 λ 2 , α 3 λ 3 ] T [p_1,p_2,p_3][α_1λ_1,α_2λ_2,α_3λ_3]^T[<em>p</em>1​,<em>p</em>2​,<em>p</em>3​][<em>α</em>1​<em>λ</em>1​,<em>α</em>2​<em>λ</em>2​,<em>α</em>3​<em>λ</em>3​]<em>T</em></p>
-<p>p i p_ip<strong>i，λ i λiλ</strong>i分别是RGB像素值3 × 3协方差矩阵的第ii个特征向量和特征值，α i αiα<strong>i是前面提到的随机变量。对于某个训练图像的所有像素，每个α i α_iα</strong>i只获取一次，直到图像进行下一次训练时才重新获取。这个方案近似抓住了自然图像的一个重要特性，即光照的颜色和强度发生变化时，目标身份是不变的。这个方案减少了top 1错误率1%以上</p>
-<h4 id="dropout"><a href="#dropout" class="headerlink" title="dropout"></a>dropout</h4><p><img src="/posts/12577bd1/image-20210923023527214.png" alt="image-20210923023527214"></p>
-<p>将许多不同模型的预测结合起来是降低测试误差[1, 3]的一个非常成功的方法，但对于需要花费几天来训练的大型神经网络来说，这似乎太昂贵了。然而，有一个非常有效的模型结合版本，它只花费两倍的训练成本。这种最近引入的技术，叫做”dropout”[10]，它会以0.5的概率对每个隐层神经元的输出设为0。那些“失活的”的神经元不再进行前向传播并且不参与反向传播。因此每次输入时，神经网络会采样一个不同的架构，但所有架构共享权重。这个技术减少了复杂的神经元互适应，因为一个神经元不能依赖特定的其它神经元的存在。因此，神经元被强迫学习更鲁棒的特征，它在与许多不同的其它神经元的随机子集结合时是有用的。在测试时，我们使用所有的神经元但它们的输出乘以0.5，对指数级的许多失活网络的预测分布进行几何平均，这是一种合理的近似。</p>
-<p>我们在图2中的前两个全连接层使用失活。如果没有失活，我们的网络表现出大量的过拟合。失活大致上使要求收敛的迭代次数翻了一倍。</p>
-<h3 id="学习细节"><a href="#学习细节" class="headerlink" title="学习细节"></a>学习细节</h3><p><img src="/posts/12577bd1/image-20210923023612000.png" alt="image-20210923023612000"></p>
-<p><img src="/posts/12577bd1/image-20210923023622296.png" alt="image-20210923023622296"></p>
-<p>我们使用随机梯度下降来训练我们的模型，样本的batch size为128，动量为0.9，权重衰减为0.0005。我们发现少量的权重衰减对于模型的学习是重要的。换句话说，权重衰减不仅仅是一个正则项：它减少了模型的训练误差。权重w的更新规则是</p>
-<p><img src="/posts/12577bd1/image-20210923024123554.png" alt="image-20210923024123554"></p>
-<p>i是迭代索引，v是动量变量，ε是学习率，是目标函数对w，在<img src="/posts/12577bd1/image-20210923024138645.png" alt="image-20210923024138645">上的第i 批微分Di的平均。</p>
-<p>我们使用均值为0，标准差为 0.01的高斯分布对每一层的权重进行初始化。我们在第2，4，5卷积层和全连接隐层将神经元偏置初始化为常量1。这个初始化通过为ReLU提供正输入加速了学习的早期阶段。我们在剩下的层将神经元偏置初始化为0。</p>
-<p>我们对所有的层使用相等的学习率，这个是在整个训练过程中我们手动调整得到的。当验证误差在当前的学习率下停止提供时，我们遵循启发式的方法将学习率除以10。学习率初始化为0.01，在训练停止之前降低三次。我们在120万图像的训练数据集上训练神经网络大约90个循环，在两个NVIDIA GTX 580 3GB GPU上花费了五到六天。</p>
-<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><p><img src="/posts/12577bd1/image-20210923023740431.png" alt="image-20210923023740431"></p>
-<p>我们在ILSVRC-2010上的结果概括为表1。我们的神经网络取得了top-1 37.5%，top-5 17.0%的错误率。在ILSVRC-2010竞赛中最佳结果是top-1 47.1%，top-5 28.2%，使用的方法是对6个在不同特征上训练的稀疏编码模型生成的预测进行平均，从那时起已公布的最好结果是top-1 45.7%，top-5 25.7%，使用的方法是平均在Fisher向量（FV）上训练的两个分类器的预测结果，Fisher向量是通过两种密集采样特征计算得到的。</p>
-<p>我们也用我们的模型参加了ILSVRC-2012竞赛并在表2中报告了我们的结果。由于ILSVRC-2012的测试集标签不可以公开得到，我们不能报告我们尝试的所有模型的测试错误率。在这段的其余部分，我们会使用验证误差率和测试误差率互换，因为在我们的实验中它们的差别不会超过0.1%（看图2）。本文中描述的CNN取得了top-5 18.2%的错误率。五个类似的CNN预测的平均误差率为16.4%。为了对ImageNet 2011秋季发布的整个数据集（1500万图像，22000个类别）进行分类，我们在最后的池化层之后有一个额外的第6卷积层，训练了一个CNN，然后在它上面进行“fine-tuning”，在ILSVRC-2012取得了16.6%的错误率。对在ImageNet 2011秋季发布的整个数据集上预训练的两个CNN和前面提到的五个CNN的预测进行平均得到了15.3%的错误率。第二名的最好竞赛输入取得了26.2%的错误率，他的方法是对FV上训练的一些分类器的预测结果进行平均，FV在不同类型密集采样特征计算得到的。</p>
-<p>最后，我们也报告了我们在ImageNet 2009秋季数据集上的误差率，ImageNet 2009秋季数据集有10,184个类，890万图像。在这个数据集上我们按照惯例用一半的图像来训练，一半的图像来测试。由于没有建立测试集，我们的数据集分割有必要不同于以前作者的数据集分割，但这对结果没有明显的影响。我们在这个数据集上的的top-1和top-5错误率是67.4%和40.9%，使用的是上面描述的在最后的池化层之后有一个额外的第6卷积层网络。这个数据集上公开可获得的最好结果是78.1%和60.9%。</p>
-<h4 id="定性评估"><a href="#定性评估" class="headerlink" title="定性评估"></a>定性评估</h4><p><img src="/posts/12577bd1/image-20210923023912100.png" alt="image-20210923023912100"><img src="/posts/12577bd1/image-20210923023928066.png" alt="image-20210923023928066"></p>
-<p>图3显示了网络的两个数据连接层学习到的卷积核。网络学习到了大量的频率核、方向选择核，也学到了各种颜色点。注意两个GPU表现出的专业化，3.5小节中描述的受限连接的结果。GPU 1上的核主要是没有颜色的，而GPU 2上的核主要是针对颜色的。这种专业化在每次运行时都会发生，并且是与任何特别的随机权重初始化（以GPU的重新编号为模）无关的。</p>
-<p>图3：第一卷积层在<code>224×224×3</code>的输入图像上学习到的大小为<code>11×11×3</code>的96个卷积核。上面的48个核是在GPU 1上学习到的而下面的48个卷积核是在GPU 2上学习到的。更多细节请看6.1小节。</p>
-<p>在图4的左边部分，我们通过在8张测试图像上计算它的top-5预测定性地评估了网络学习到的东西。注意即使是不在图像中心的目标也能被网络识别，例如左上角的小虫。大多数的top-5标签似乎是合理的。例如，对于美洲豹来说，只有其它类型的猫被认为是看似合理的标签。在某些案例（格栅，樱桃）中，网络在意的图片焦点真的很含糊。</p>
-<p>图4：（左）8张ILSVRC-2010测试图像和我们的模型认为最可能的5个标签。每张图像的下面是它的正确标签，正确标签的概率用红条表示（如果正确标签在top 5中）。（右）第一列是5张ILSVRC-2010测试图像。剩下的列展示了6张训练图像，这些图像在最后的隐藏层的特征向量与测试图像的特征向量有最小的欧氏距离。</p>
-<p>探索网络可视化知识的另一种方式是思考最后的4096维隐藏层在图像上得到的特征激活。如果两幅图像生成的特征激活向量之间有较小的欧式距离，我们可以认为神经网络的更高层特征认为它们是相似的。图4表明根据这个度量标准，测试集的5张图像和训练集的6张图像中的每一张都是最相似的。注意在像素级别，检索到的训练图像与第一列的查询图像在L2上通常是不接近的。例如，检索的狗和大象似乎有很多姿态。我们在补充材料中对更多的测试图像呈现了这种结果。</p>
-<p>通过两个4096维实值向量间的欧氏距离来计算相似性是效率低下的，但通过训练一个自动编码器将这些向量压缩为短二值编码可以使其变得高效。这应该会产生一种比将自动编码器应用到原始像素上[14]更好的图像检索方法，自动编码器应用到原始像素上的方法没有使用图像标签，因此会趋向于检索与要检索的图像具有相似边缘模式的图像，无论它们是否是语义上相似。</p>
-<h3 id="探讨"><a href="#探讨" class="headerlink" title="探讨"></a>探讨</h3><p><img src="/posts/12577bd1/image-20210923024027742.png" alt="image-20210923024027742"></p>
-<p>我们的结果表明一个大型深度卷积神经网络在一个具有高度挑战性的数据集上使用纯有监督学习可以取得破纪录的结果。值得注意的是，如果移除一个卷积层，我们的网络性能会降低。例如，移除任何中间层都会引起网络损失大约2%的top-1性能。因此深度对于实现我们的结果非常重要。</p>
-<p>为了简化我们的实验，我们没有使用任何无监督的预训练，尽管我们希望它会有所帮助，特别是在如果我们能获得足够的计算能力来显著增加网络的大小而标注的数据量没有对应增加的情况下。到目前为止，我们的结果已经提高了，因为我们的网络更大、训练时间更长，但为了匹配人类视觉系统的下颞线（视觉专业术语）我们仍然有许多数量级要达到。最后我们想在视频序列上使用非常大的深度卷积网络，视频序列的时序结构会提供非常有帮助的信息，这些信息在静态图像上是缺失的或远不那么明显。</p>
-<h2 id="对论文中的细节分析"><a href="#对论文中的细节分析" class="headerlink" title="对论文中的细节分析"></a>对论文中的细节分析</h2><p>（过几天再写）</p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-09-20T15:27:44.000Z" title="2021/9/20 下午11:27:44">2021-09-20</time>发表</span><span class="level-item"><a class="link-muted" href="/categories/%E5%85%B3%E4%BA%8E/">关于</a></span><span class="level-item">8 分钟读完 (大约1218个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/posts/1/">关于个人博客网站的说明</a></h1><div class="content"><h2 id="提要"><a href="#提要" class="headerlink" title="提要"></a>提要</h2><p>我已经初步完成了个人博客的搭建，也申请了一个域名作为博客的主页。名字就叫“William Leung的个人博客”，地址为<a href="https://williamleung.cn/">https://williamleung.cn/</a></p>
+<h3 id="文章目录"><a href="#文章目录" class="headerlink" title="文章目录"></a>文章目录</h3><ul>
+<li><ul>
+<li><ul>
+<li>摘要</li>
+<li>论文小标题</li>
+<li>AlexNet 网络结构</li>
+<li><ul>
+<li> ReLU</li>
+<li>Training on Multiple GPUs</li>
+<li>Local Response Normalization（局部响应标准化）</li>
+<li>Overlapping Pooling</li>
+</ul>
+</li>
+<li>Reducing Overfitting</li>
+<li>实验结果与分析</li>
+<li>论文总结</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>下面，我们首先来看看摘要。</p>
+<h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p><img src="https://img-blog.csdnimg.cn/20201124165216562.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><strong>我们可以将摘要总结如下</strong>：</p>
+<ul>
+<li>在 ILSVRC-2010 的120万图片上训练深度卷积神经网络，获得最优结果，top-1 和 top-5 error 分别为 37.5% 和 17%。</li>
+<li>在 Alexnet 中，一共有6千万个参数和65万个神经元，包括5个卷积层和3个全连接层。</li>
+<li>为了训练的更快，Alexnet 使用了非饱和激活函数——ReLU，采用GPU进行训练</li>
+<li>为了防止过拟合，在全连接层采取了 “dropout” 的方法。</li>
+<li>基于以上技巧，在 ILSVRC-2012 以超出第二名10.9个百分点成绩夺冠。</li>
+</ul>
+<hr>
+<h3 id="论文小标题"><a href="#论文小标题" class="headerlink" title="论文小标题"></a>论文小标题</h3><p>  看完了摘要，我们应该将这篇论文的小标题列举出来，通过观察这些小标题，我们大致就可以看出这篇论文的大致框架是怎样的。</p>
+<p><img src="https://img-blog.csdnimg.cn/2020112416412246.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>  可以看出，我们应该重点关注第3部分，它的子标题也是最多的。我们可以看到 3.5 是一个总览框架，所以我们阅读时可以先看 3.5，再去看 3.1-3.4。</p>
+<p>  下面我们就从 AlexNet 网络结构出发（3.5）。</p>
+<hr>
+<h3 id="AlexNet-网络结构"><a href="#AlexNet-网络结构" class="headerlink" title="AlexNet 网络结构"></a>AlexNet 网络结构</h3><p>  我们先看 3.5 的总体框架。</p>
+<p><img src="https://img-blog.csdnimg.cn/2020112417105897.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><strong>可以从上面两段文字总结如下</strong>：</p>
+<ol>
+<li>这个网络包括8个带权重的层，5个卷积层和3个全连接层。</li>
+<li>第2，4，5层只和相同 GPU 上的前一层相连接。</li>
+<li>第3层和第2层中所有 GPU 上的前一层相连。</li>
+<li>在第1层和第2层后有 LRN 层。</li>
+<li>最大池化层会在第1，2，5层之后。</li>
+<li>ReLU函数会在所有的卷积层和全连接层。</li>
+</ol>
+<p>接下来我们看看对图的描述。</p>
+<p><img src="https://img-blog.csdnimg.cn/20201124200434382.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>  在文字中，神经网络的输入是 150,528 维度的，从图中就可以看出，输入是 224x224x3 = 150528。然后每层的神经元个数如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/20201124202040999.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>  我们按照之前的文字描述将原神经网络给描述得更清晰一些：</p>
+<p><img src="https://img-blog.csdnimg.cn/20201124202948287.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>  <br>  如果你还是不太明白，那么就看下面这张图：</p>
+<p><img src="https://img-blog.csdnimg.cn/20201124204109920.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>  但是你看到第一层，你就可能会有一个疑问，输入层不是 224x224 吗，怎么变成了 227x227，那是因为如果将 224x224 代入 F o F_o<em>F**o</em> 公式计算会出现不能整除的情况，所以为了避免这种情况，应该将此处的 padding 设为 2，代入F o F_o<em>F**o</em> 公式可得到输出后的大小为 55*55。</p>
+<p>  接下来，我们就来计算一下，这个网络怎么得到的 6000 万个参数。</p>
+<p><img src="https://img-blog.csdnimg.cn/20201124205935514.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>  <br>  我们通过上面的公式计算一下第一层的连接数量：<code>3 * 11 * 11 * 96 + 96 = 34944</code>，第二层的连接数为：<code>96 * 5 * 5 * 256 + 256 = 614656</code>，以此类推。但是我们观察到 FC1 层的连接数量为 37,752,832 个，占了整个连接数量的一半，所以全连接层是非常消耗内存的。</p>
+<p>  我们现在已经整体的把握了 AlexNet 的网络结构，我们再倒回去看 3.1-3.4 的部分，来看看该网络到底是怎么实现的。</p>
+<p><img src="https://img-blog.csdnimg.cn/20201124210856807.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>  根据上面一段话可知，3.1-3.4 是按照重要程度依次递减排列的。那么我们将 3.1-3.4 的小标题再列出来：<br>  3.1 ReLU Nonlinearity（the most important）<br>  3.2 Training on Multiple GPUs<br>  3.3 Local Response Normalization（局部相应标准化）<br>  3.4 Overlapping Pooling</p>
+<p>  </p>
+<h4 id="3-1-ReLU"><a href="#3-1-ReLU" class="headerlink" title="3.1 ReLU"></a>3.1 ReLU</h4><p>下面，我们就来看看 3.1。<br><img src="https://img-blog.csdnimg.cn/20201124211256282.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>  <br>  上面一段话表明，通常我们模型的激活函数会选择 tanh 或者 sigmoid 函数，但是它们都是属于饱和函数，在这个模型中，采用的是<strong>非饱和非线性的激活函数</strong> —— ReLU 函数。因为就梯度下降的训练时间而言，饱和函数要比非饱和函数慢得多。可以从下图中观察得知：</p>
+<p><img src="https://img-blog.csdnimg.cn/20201125073041214.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>  从上图可以得知，当 Training error rate 下降到 0.25 时，ReLU 函数需要训练大概 6 个 epoch，而 tanh 要训练 36 个 epoch，两个函数差了 6 倍之多，可见该网络模型的成功离不开 ReLU 函数。</p>
+<p>那么 ReLU 还有哪些优点呢？</p>
+<ul>
+<li>使网络训练更快</li>
+<li>防止梯度消失</li>
+<li>使网络具有稀疏性</li>
+</ul>
+<p>  下面就来看一下 ReLU 函数和 Sigmoid 函数曲线的对比：</p>
+<p><img src="https://img-blog.csdnimg.cn/20201125074437311.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>补充：饱和函数</strong><br>  <img src="https://img-blog.csdnimg.cn/20201124211917693.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">
+  </p>
+</blockquote>
+<h4 id="3-2-Training-on-Multiple-GPUs"><a href="#3-2-Training-on-Multiple-GPUs" class="headerlink" title="3.2 Training on Multiple GPUs"></a>3.2 Training on Multiple GPUs</h4><p>  该模型主要使用了2个GPU，在模型总览那里我们已经了解了怎么使用多 GPU，这里就不再赘述了。</p>
+<h4 id="3-3-Local-Response-Normalization（局部响应标准化）"><a href="#3-3-Local-Response-Normalization（局部响应标准化）" class="headerlink" title="3.3 Local Response Normalization（局部响应标准化）"></a>3.3 Local Response Normalization（局部响应标准化）</h4><p>  <strong>局部响应标准化</strong>：有助于 AlexNet <strong>泛化能力的提升</strong>，受真实神经元<strong>侧抑制</strong>（lateral inhibition）启发。</p>
+<p>  <strong>侧抑制</strong>：细胞分化变为不同时，它会对周围细胞产生抑制信号，阻止它们向相同方向分化，最终表现为细胞命运的不同。</p>
+<p>  在论文中提到了一个公式，下面我们就来解释一下这个公式：</p>
+<p><img src="https://img-blog.csdnimg.cn/20201125075506464.png#pic_center" alt="在这里插入图片描述"></p>
+<ul>
+<li>b x , y i b_{x,y}^i<em>b**x</em>,<em>y**i</em>：表示神经元局部响应标准化后的值，i i<em>i</em> 表示通道，x , y x, y<em>x</em>,<em>y</em> 像素的位置</li>
+<li>a x , y i a_{x,y}^i<em>a**x</em>,<em>y**i</em>：表示神经元局部响应标准化前的值</li>
+<li>k k<em>k</em>：超参数，由原型中的 bias 指定</li>
+<li>α α<em>α</em>：超参数，由原型中的 α α<em>α</em></li>
+<li>N N<em>N</em>：每个特征图里面最内层向量的列数</li>
+<li>β β<em>β</em>：超参数，由原型中的 β β<em>β</em> 指定</li>
+<li>其中，k = 2 , n = 5 , α = 1 e − 4 , β = 0.75 k=2, n=5, α=1e-4, β=0.75<em>k</em>=2,<em>n</em>=5,<em>α</em>=1<em>e</em>−4,<em>β</em>=0.75</li>
+</ul>
+<p>  式子中的 max(0, i-n/2) 和 min(N-1, i+n/2) 是为了边界溢出的问题。我们真正需要关心的是 i-n/2 和 i+n/2。假设我们当前通道为 i i<em>i</em>，我们会往左考虑 n/2 个通道，向右考虑 n/2 个通道，这就对应了侧抑制概念中当细胞分化不同时，它会对<strong>周围细胞</strong>产生抑制信号。而左右 n/2 对应周围细胞。其实这个公式就是看分母，如果分母越大，那么最后得出的值相对就会比较小，就表现出抑制的作用。</p>
+<h4 id="3-4-Overlapping-Pooling"><a href="#3-4-Overlapping-Pooling" class="headerlink" title="3.4 Overlapping Pooling"></a>3.4 Overlapping Pooling</h4><p>  我们先来看一下我们常见的池化方式是怎样的？</p>
+<p><img src="https://img-blog.csdnimg.cn/20201125091952691.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>  <br>  上图中输入特征图是 4<em>4 的，它的滑动窗口大小是 2</em>2 的，那么它会进行4次池化，而且每次池化的部分是不重叠的（每一部分用不同颜色区分）。通常，我们就会将移动的步长 s 设置为滑动窗口大小，即 s = 2。但是该模型中使用的是有重叠的池化，即 s &lt; 滑动窗口大小。</p>
+<p><img src="https://img-blog.csdnimg.cn/20201125092540323.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>  以上就是神经网络大致结构。下面我们就来看看网络的训练技巧，这就是第 4 小节的内容了，Reducing Overfitting。</p>
+<hr>
+<h3 id="Reducing-Overfitting"><a href="#Reducing-Overfitting" class="headerlink" title="Reducing Overfitting"></a>Reducing Overfitting</h3><p>  这篇论文主要使用的减少过拟合的技巧有两个：Data Augmentation 和 Dropout。</p>
+<p>  下面我们先来看看 4.1 Data Augmentation 主要使用了哪些方法。</p>
+<p><img src="https://img-blog.csdnimg.cn/20201126081429194.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>  <br>(1)：在训练阶段，从大小为 256<em>256 的图片中随机截取出 224</em>224 的图片，然后再经过水平翻转，我们可以得到 2048 张图片。<br>(2)：2048 = (256-224)^2 * 2 平方表示宽和高两方面，<em>2 表示水平翻转<br>(3)：在测试阶段采取的方法是从一张 256</em>256 的图片截取 5 张 224*224 的图片，分别从左上角，右上角，左下角，右下角，中心截取5张，然后分别进行水平翻转获得10张图片。</p>
+<p><img src="https://img-blog.csdnimg.cn/20201126082104795.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>  可见第一种方法使用的是裁剪和翻转来使数据量扩增。下面我们来看看第二种方法。</p>
+<p><img src="https://img-blog.csdnimg.cn/20201126083025925.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>  主要说的就是对<strong>图像颜色的扰动</strong>。</p>
+<p>  下面我们总结一下针对 Data Augmentation 采取的两种方法：</p>
+<p><img src="https://img-blog.csdnimg.cn/20201126083200580.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>  <br>  说完了 Data Augmentation。再来看看 Dropout（随即失失活）。</p>
+<p><img src="https://img-blog.csdnimg.cn/20201126090300131.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/2020112609024480.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<hr>
+<h3 id="实验结果与分析"><a href="#实验结果与分析" class="headerlink" title="实验结果与分析"></a>实验结果与分析</h3><p>  我们主要分析三个部分：</p>
+<p><img src="https://img-blog.csdnimg.cn/20201126090711770.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>  <br>  下面先来看看第一部分，在 ILSVRC-2012 挑战赛中的成果。下表表示了 AlexNet 在 Top-1 和 Top-5 这两个指标上的变化情况，它采用了四种不同的方式来获取这些指标。我们要去学习网络不断改进的思路和方法。</p>
+<p><img src="https://img-blog.csdnimg.cn/20201126091309315.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">
+  </p>
+<p>  接下来我们看 Qualitative Evaluations。</p>
+<p><img src="https://img-blog.csdnimg.cn/2020112611002659.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201126125530400.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>  从上图的有右图可以得出特征的相似性：相似图片的第二个全连接层输出<strong>特征向量</strong>的欧氏距离<strong>相近</strong>。</p>
+<p>  <strong>启发</strong>：可用 AlexNet 提取高级特征进行图像检索、图像聚类、图像编码。</p>
+<hr>
+<h3 id="论文总结"><a href="#论文总结" class="headerlink" title="论文总结"></a>论文总结</h3><p>  在研究完每篇论文之后，我们都需要做一个总结。主要从三方面进行总结：关键点、创新点和启发点。</p>
+<p>  那么我们先来看一下这篇论文的总结是什么?</p>
+<p><img src="https://img-blog.csdnimg.cn/20201126192043286.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>  第一段其实主要想讲关于<strong>模型的网络结构之间的相关联</strong>是非常重要的，例如，我们移除了某一个神经网络的卷积层，这个模型的性能会下降大概2%。同样的，我们在使用网络的时候，也不要随意增加网络的层数。</p>
+<p>  第二段主要是想讲<strong>未来的研究方向</strong>，这也是大部分论文在论文结尾都会点出来的，自己的不足或者未来可以去发展的方向。这里它提到未来可以用视频的数据来训练一个更大的<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C&spm=1001.2101.3001.7020">卷积神经网络</a>。因为这里提到一些时序上的信息的缺失，AlexNet 都是基于 2D 的图片，是缺少时间这个维度的，而视频数据恰恰补充了这个信息，所以这里提出来了未来可以研究的方向就是基于视频信息来训练一个更大的卷积神经网络。</p>
+<p>  下面就来进行自我总结。</p>
+<p><strong>关键点</strong></p>
+<ul>
+<li>大量带标签的数据 —— ImageNet（算料）</li>
+<li>高性能计算资源 —— GPU（算力）</li>
+<li>合理算法模型 —— 深度卷积神经网络（算法）</li>
+</ul>
+<p><strong>创新点</strong></p>
+<ul>
+<li>采用 ReLU 加快大型神经网络训练</li>
+<li>采用 LRN 提升大型网络泛化能力</li>
+<li>采用 Overlapping Pooling 提升指标</li>
+<li>采用随机裁剪翻转及色彩扰动增加数据多样性（重点）</li>
+<li>采用 Dropout 减轻过拟合（FC层）</li>
+</ul>
+<p><strong>启发点</strong></p>
+<ul>
+<li><strong>深度与宽度可决定网络能力</strong><br>Their capacity can be controlled by varying their depth and breadth. （1 Introduction p2）</li>
+<li>更强大的GPU及更多数据可进一步提高模型性能<br>All of our experiments suggest that our results<br>can be improved simply by waiting for faster GPUs and bigger datasets to become available.</li>
+<li><strong>图片缩放细节，对短边先缩放</strong><br>Given a<br>rectangular image, we first rescaled the image such that the shorter side was of length 256, and then<br>cropped out the central 256×256 patch from the resulting image.（2 Dataset p3）</li>
+<li><strong>ReLU 不需要对输入进行标准化来防止饱和现象，即说明 sigmoid/tanh 激活函数有必要对输入进行标准化</strong><br>ReLUs have the desirable property that they do not require input normalization to prevent them<br>from saturating. （3.3 LRN p1）</li>
+</ul>
+<hr>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-09-20T15:27:44.000Z" title="2021/9/20 23:27:44">2021-09-20</time>发表</span><span class="level-item"><a class="link-muted" href="/categories/%E5%85%B3%E4%BA%8E/">关于</a></span><span class="level-item">8 分钟读完 (大约1272个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/posts/1/">关于个人博客网站的说明</a></h1><div class="content"><h2 id="提要"><a href="#提要" class="headerlink" title="提要"></a>提要</h2><p>我已经初步完成了个人博客的搭建，也申请了一个域名作为博客的主页。名字就叫“William Leung的个人博客”，地址为<a href="https://williamleung.cn/">https://williamleung.cn/</a></p>
 <p>我在此写一篇博客来阐述我搭建个此个人博客的初衷以及未来的规划。</p>
 <h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="1-为什么要搭建这个博客呢？"><a href="#1-为什么要搭建这个博客呢？" class="headerlink" title="1.为什么要搭建这个博客呢？"></a>1.为什么要搭建这个博客呢？</h3><ul>
 <li><p>为了在学习的过程中记录一些心得与体会，方便以后的复习。如果将学习笔记记在笔记本中容易丢失，而且携带很不方便。若是将笔记记在iPad中虽然解决了携带的问题，但对于一些需要跑代码配环境的知识难以记录，而且iPad的iCloud云容量小，并不能满足我的学习需求。所以我决定搭建一个博客，提高学习以及复习的效率。</p>
@@ -90,20 +348,19 @@
 <li>自己搭建一个个人博客也是一个学习的过程。在学习的过程中又可以达到自己想有一个博客的目的，一举两得。</li>
 </ul>
 <h3 id="3-博客上会发布什么内容？"><a href="#3-博客上会发布什么内容？" class="headerlink" title="3.博客上会发布什么内容？"></a>3.博客上会发布什么内容？</h3><ul>
-<li><p>现在是初建博客的阶段，我暂时也没有想好会做一些什么方面的内容。由于我是学习人工智能方向的大学生，并且有考研的想法。初步将范围界定在一下范围中。</p>
-<ul>
+<li>现在是初建博客的阶段，我暂时也没有想好会做一些什么方面的内容。由于我是学习人工智能方向的大学生，并且有考研的想法。初步将范围界定在一下范围中。<ul>
 <li>408（数据结构、计算机组成、操作系统、计算机网络）</li>
 <li>考研数学（高等数学、概率论、线性代数）</li>
 <li>人工智能相关方向（如Python、TensorFlow、神经网络、机器学习 等）</li>
 <li>一些非专业的内容（比如某些电影、书籍的观后感，游记，随笔，以及非本专业的其他领域的内容等）</li>
 </ul>
 </li>
-<li><p>专业知识的学习与分享我将放在专门的类别当中，随笔将会放到杂项里。</p>
-</li>
+<li>专业知识的学习与分享我将放在专门的类别当中，随笔将会放到杂项里。</li>
+<li><strong>2022.5.27更新：我发现我并没有太多精力写如此广阔范围的博客，故将博客范文限定在计算机方向内。目前只有论文精度一个板块。</strong></li>
 </ul>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>虽然我的专业是计算机科学与技术，但我并没有选开发方向，对网页开发并不是很了解，在搭建过程中很多东西我不是很清楚，大多数都是现学现卖。但是在这个网站的开发过程中，我也学到了很多知识，了解了很多计算机学科的知识。总之离全栈工程师又进了一步。</p>
 <p>在写这篇博客的时候我的博客已经基本搭建完成。但具体的搭建方法我还没有整理出来，等有时间后我会再写一篇博客，具体的写出我搭建本博客的方法以及过程，以供大家学习参考。</p>
-</div></article></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="https://img2.baidu.com/it/u=1470655022,1507167867&amp;fm=26&amp;fmt=auto" alt="William"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">William</p><p class="is-size-6 is-block">一个学计算机的大学生</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Hangzhou, China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">2</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">3</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">6</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/mrwilliamleung" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/mrwilliamleung"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="QQ" href="http://wpa.qq.com/msgrd?v=3&amp;uin=858920934&amp;site=qq&amp;menu=yes"><i class="fab fa-qq"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Weibo" href="https://weibo.com/p/1005051203942970/home?from=page_100505&amp;mod=TAB#place"><i class="fab fa-weibo"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Instagram" href="https://www.instagram.com/mr_williamleung/"><i class="fab fa-instagram"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://www.Google.com/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Google</span></span><span class="level-right"><span class="level-item tag">www.google.com</span></span></a></li><li><a class="level is-mobile" href="https://www.baidu.com/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Baidu</span></span><span class="level-right"><span class="level-item tag">www.baidu.com</span></span></a></li><li><a class="level is-mobile" href="https://en.wikipedia.org/wiki/Main_Page" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Wiki</span></span><span class="level-right"><span class="level-item tag">en.wikipedia.org</span></span></a></li><li><a class="level is-mobile" href="https://www.bilibili.com/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Bilibili</span></span><span class="level-right"><span class="level-item tag">www.bilibili.com</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E5%85%B3%E4%BA%8E/"><span class="level-start"><span class="level-item">关于</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"><span class="level-start"><span class="level-item">计算机</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"><span class="level-start"><span class="level-item">人工智能</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-09-22T19:21:43.000Z">2021-09-23</time></p><p class="title"><a href="/posts/12577bd1/">AlexNet论文精读</a></p><p class="categories"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a> / <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-09-20T15:27:44.000Z">2021-09-20</time></p><p class="title"><a href="/posts/1/">关于个人博客网站的说明</a></p><p class="categories"><a href="/categories/%E5%85%B3%E4%BA%8E/">关于</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2021/09/"><span class="level-start"><span class="level-item">九月 2021</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/AlexNet/"><span class="tag">AlexNet</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"><span class="tag">个人博客</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"><span class="tag">深度学习</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"><span class="tag">神经网络</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%BA%E6%96%87/"><span class="tag">论文</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%B4%E6%98%8E/"><span class="tag">说明</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="WilliamLeung的个人博客" height="28"></a><p class="is-size-7"><span>&copy; 2021 William</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+</div></article></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="https://img2.baidu.com/it/u=1470655022,1507167867&amp;fm=26&amp;fmt=auto" alt="William"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">William</p><p class="is-size-6 is-block">一个学计算机的大学生</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Hangzhou, China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">3</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">3</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">6</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/mrwilliamleung" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/mrwilliamleung"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="QQ" href="http://wpa.qq.com/msgrd?v=3&amp;uin=858920934&amp;site=qq&amp;menu=yes"><i class="fab fa-qq"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Instagram" href="https://www.instagram.com/mr_williamleung/"><i class="fab fa-instagram"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://www.Google.com/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Google</span></span><span class="level-right"><span class="level-item tag">www.google.com</span></span></a></li><li><a class="level is-mobile" href="https://www.baidu.com/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Baidu</span></span><span class="level-right"><span class="level-item tag">www.baidu.com</span></span></a></li><li><a class="level is-mobile" href="https://en.wikipedia.org/wiki/Main_Page" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Wiki</span></span><span class="level-right"><span class="level-item tag">en.wikipedia.org</span></span></a></li><li><a class="level is-mobile" href="https://www.bilibili.com/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Bilibili</span></span><span class="level-right"><span class="level-item tag">www.bilibili.com</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E5%85%B3%E4%BA%8E/"><span class="level-start"><span class="level-item">关于</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"><span class="level-start"><span class="level-item">计算机</span></span><span class="level-end"><span class="level-item tag">2</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"><span class="level-start"><span class="level-item">人工智能</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-05-27T14:15:13.000Z">2022-05-27</time></p><p class="title"><a href="/posts/483895fb/">VGG论文精读</a></p><p class="categories"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a> / <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-09-22T19:21:43.000Z">2021-09-23</time></p><p class="title"><a href="/posts/12577bd1/">AlexNet论文精读</a></p><p class="categories"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a> / <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-09-20T15:27:44.000Z">2021-09-20</time></p><p class="title"><a href="/posts/1/">关于个人博客网站的说明</a></p><p class="categories"><a href="/categories/%E5%85%B3%E4%BA%8E/">关于</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2022/05/"><span class="level-start"><span class="level-item">五月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/09/"><span class="level-start"><span class="level-item">九月 2021</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/AlexNet/"><span class="tag">AlexNet</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"><span class="tag">个人博客</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"><span class="tag">深度学习</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"><span class="tag">神经网络</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%BA%E6%96%87/"><span class="tag">论文</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%B4%E6%98%8E/"><span class="tag">说明</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="WilliamLeung的个人博客" height="28"></a><p class="is-size-7"><span>&copy; 2022 William</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
             article: {
                 highlight: {
                     clipboard: true,

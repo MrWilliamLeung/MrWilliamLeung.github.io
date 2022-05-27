@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>VGG论文精读 - WilliamLeung的个人博客</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#f7f7f7"><meta name="application-name" content="WilliamLeung的博客"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="msapplication-TileColor" content="#f7f7f7"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="WilliamLeung的博客"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="文章目录 题目 论文总览 Part 1：论文导读  研究背景 研究成果   论文精读  摘要 论文小标题 VGGNet 网络结构 Classification Framework  Training Testing  Implementation Details   Classification Experiments   Single Scale Evaluation  Multi-Scale"><meta property="og:type" content="blog"><meta property="og:title" content="VGG论文精读"><meta property="og:url" content="http://williamleung.cn/posts/483895fb/"><meta property="og:site_name" content="WilliamLeung的个人博客"><meta property="og:description" content="文章目录 题目 论文总览 Part 1：论文导读  研究背景 研究成果   论文精读  摘要 论文小标题 VGGNet 网络结构 Classification Framework  Training Testing  Implementation Details   Classification Experiments   Single Scale Evaluation  Multi-Scale"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://img-blog.csdnimg.cn/2020113013431598.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/2020113014022218.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20201130141052968.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20201130142347738.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20201130143623572.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20201130144421507.png"><meta property="og:image" content="https://img-blog.csdnimg.cn/20201130145042462.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20201130160204333.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20201130214328120.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20201130161358641.png"><meta property="og:image" content="https://img-blog.csdnimg.cn/20201130162326973.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20201130163021146.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20201130191846679.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20201130211948621.png"><meta property="og:image" content="https://img-blog.csdnimg.cn/20201130193034861.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20201130205155712.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20201130214450657.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20201130220235636.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20201201074414455.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20201201082352597.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20201201083757438.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20201201084753151.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20201201085309296.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20201201090134263.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70"><meta property="article:published_time" content="2022-05-27T14:15:13.000Z"><meta property="article:modified_time" content="2022-05-27T14:23:56.357Z"><meta property="article:author" content="William"><meta property="article:tag" content="AlexNet"><meta property="article:tag" content="论文"><meta property="article:tag" content="深度学习"><meta property="article:tag" content="神经网络"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://img-blog.csdnimg.cn/2020113013431598.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://williamleung.cn/posts/483895fb/"},"headline":"VGG论文精读","image":["https://img-blog.csdnimg.cn/20201130144421507.png","https://img-blog.csdnimg.cn/20201130161358641.png","https://img-blog.csdnimg.cn/20201130211948621.png"],"datePublished":"2022-05-27T14:15:13.000Z","dateModified":"2022-05-27T14:23:56.357Z","author":{"@type":"Person","name":"William"},"publisher":{"@type":"Organization","name":"WilliamLeung的个人博客","logo":{"@type":"ImageObject","url":"http://williamleung.cn/img/logo.svg"}},"description":"文章目录 题目 论文总览 Part 1：论文导读  研究背景 研究成果   论文精读  摘要 论文小标题 VGGNet 网络结构 Classification Framework  Training Testing  Implementation Details   Classification Experiments   Single Scale Evaluation  Multi-Scale"}</script><link rel="canonical" href="http://williamleung.cn/posts/483895fb/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.15.2/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/stackoverflow-dark.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Oxanium:wght@300;400;600&amp;family=Roboto+Mono"><link rel="stylesheet" href="/css/cyberpunk.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?31bf6a481783f6848cf7b5b51202f1dc";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=UA-72437521-5" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'UA-72437521-5');</script><!--!--><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"><script src="https://cdnjs.loli.net/ajax/libs/pace/1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="WilliamLeung的个人博客" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">主页</a><a class="navbar-item" href="/categories">按类别查看</a><a class="navbar-item" href="/tags">按标签查看</a><a class="navbar-item" href="/archives">按日期查看</a><a class="navbar-item" href="/posts/1/">关于</a></div><div class="navbar-end"><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-05-27T14:15:13.000Z" title="2022/5/27 22:15:13">2022-05-27</time>发表</span><span class="level-item"><a class="link-muted" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><span> / </span><a class="link-muted" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a></span><span class="level-item">34 分钟读完 (大约5161个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">VGG论文精读</h1><div class="content"><h3 id="文章目录"><a href="#文章目录" class="headerlink" title="文章目录"></a>文章目录</h3><ul>
+<li>题目</li>
+<li>论文总览</li>
+<li>Part 1：论文导读</li>
+<li><ul>
+<li>研究背景</li>
+<li>研究成果</li>
+</ul>
+</li>
+<li>论文精读</li>
+<li><ul>
+<li>摘要</li>
+<li>论文小标题</li>
+<li>VGGNet 网络结构</li>
+<li>Classification Framework</li>
+<li><ul>
+<li>Training</li>
+<li>Testing</li>
+<li> Implementation Details</li>
+</ul>
+</li>
+<li>Classification Experiments</li>
+<li><ul>
+<li> Single Scale Evaluation</li>
+<li> Multi-Scale Evaluation</li>
+<li> Multi-Crop Evaluation</li>
+<li>Convent Fusion</li>
+<li>Comparison With The State Of The Art</li>
+</ul>
+</li>
+<li>论文总结</li>
+</ul>
+</li>
+</ul>
+<h1 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h1><p>  VggNet：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1409.1556">《Very Deep Convolutional Networks for Large-Scale Image Recognition》</a>，大规模图像识别的深度卷积网络。</p>
+<h1 id="论文总览"><a href="#论文总览" class="headerlink" title="论文总览"></a>论文总览</h1><p>  首先，读一篇论文，我们第一遍通常需要泛读，即读这篇论文的题目，摘要，各个部分的标题和小标题，以及图片和表格。</p>
+<p>  下面是泛读之后整理出该篇论文大致分成5个部分。</p>
+<p><img src="https://img-blog.csdnimg.cn/2020113013431598.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<h1 id="Part-1：论文导读"><a href="#Part-1：论文导读" class="headerlink" title="Part 1：论文导读"></a>Part 1：论文导读</h1><h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p>  VGGNet 这篇论文的主要贡献就是在于从网络<strong>深度</strong>这一角度出发，对卷积神经网络进行了改进。非常详细的评估了网络深度所带来的影响，证明了网络的深度对于性能的提升具有举足轻重的作用。而且由于文中训练的两个16层和19层的网络由于其强大的泛化能力，在之后得到了非常广泛的应用。</p>
+<blockquote>
+<p><strong>VGGNet 主要特点</strong>：</p>
+<ul>
+<li>网络很深</li>
+<li>卷积层中使用的卷积核很小，且都是3*3的卷积核</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="研究成果"><a href="#研究成果" class="headerlink" title="研究成果"></a>研究成果</h2><p>  VGGNet 在2014年的 ImageNet Challenge 中获得了分类任务的第二名和定位任务的第一名。而且在分类任务中，只和获得冠军的 GoogLeNet 只相差了 0.1%，而且在单个网络中，VGG 是表现最好的，误差是 7.0%，比 GoogLeNet 的 7.9% 高了 0.9 个百分点。<br><img src="https://img-blog.csdnimg.cn/2020113014022218.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<h1 id="Part-2：论文精读"><a href="#Part-2：论文精读" class="headerlink" title="Part 2：论文精读"></a>Part 2：论文精读</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>下面，我们先来看看摘要。<br><img src="https://img-blog.csdnimg.cn/20201130141052968.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><strong>我们可以将摘要总结如下：</strong></p>
+<ul>
+<li>这篇论文主要研究的是卷积神经网络深度对分类准确度的影响</li>
+<li>我们整个网络都使用 3*3 的卷积核，成功将深度扩大了16-19层，并且得到了一个很好的效果</li>
+<li>VGGNet 获得了2014年 ImageNet Challenge 的定位任务第一名和分类任务第二名</li>
+<li>该模型的泛化能力很强，运用到其它数据集上也得到了很好的效果</li>
+<li>表现最好的两个模型已经投入到未来的研究中</li>
+</ul>
+<hr>
+<h2 id="论文小标题"><a href="#论文小标题" class="headerlink" title="论文小标题"></a>论文小标题</h2><p><img src="https://img-blog.csdnimg.cn/20201130142347738.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>  从小标题的个数可以看出，第4部分的子标题最多，我们应该重点关注，其次应该关注第2、3部分。</p>
+<p>  当我们正式进入某一部分时，我们可以先看一下，该部分有没有 Overall、Conclusion、Discussion等等。或许我们先从该部分入手，先了解到该部分的大体内容，再返回去看具体的实现细节。</p>
+<p>  那么我们先从网络的架构（Configurations）入手，从上面的小标题可以看出，我们可以先从 2.3 小节入手。</p>
+<hr>
+<h2 id="2-VGGNet-网络结构"><a href="#2-VGGNet-网络结构" class="headerlink" title="2. VGGNet 网络结构"></a>2. VGGNet 网络结构</h2><p>我们先看 2.3 的 discussion。<br><img src="https://img-blog.csdnimg.cn/20201130143623572.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><strong>可以从上面一段文字总结如下：</strong></p>
+<ol>
+<li>整个神经网络都是使用的 3*3的卷积核</li>
+<li>通过堆叠多个3<em>3的卷积核来代替大尺度卷积核，堆积2个3</em>3的卷积代替一个5<em>5的卷积，堆叠3个3</em>3的卷积代替一个7*7的卷积</li>
+<li>这样做的好处：不仅能使决策函数更有区别，而且使得参数大大减少</li>
+</ol>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20201130144421507.png" alt="在这里插入图片描述"></p>
+<p>  <strong>可以从上面一段文字总结如下：</strong> 使用 1*1 的卷积可以在不影响卷积层的结果的情况下增加决策函数的非线性。</p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20201130145042462.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>  <strong>可以从上面一段文字总结如下：</strong> 这次比赛的冠军 GoogLeNet 也使用了非常深的网络（22层）和小的卷积核（1<em>1，3</em>3，5*5）。它们使用为了减少计算量，设计更为复杂，更积极地减少了第一层的特征图的空间分布。但是从单个网络的分类准确率来看，VGGNet 的表现要优于 GoogLeNet。</p>
+<hr>
+<p>接下来，我们再来看 2.3 小节中的图。<br><img src="https://img-blog.csdnimg.cn/20201130160204333.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>  <br>  在实验中，一共尝试了上面六种模型（每一列是一种模型），模型中都使用了是 3x3 的卷积核大小，在模型 C 中尝试了 1x1 的卷积核，模型的深度从左向右依次增加。为了简洁方便，表格中只展示了卷积操作和池化操作，没有显示激活函数（在每个卷积层和全连接层后都有激活函数）。而且我们发现每层的通道数很小，第一层的通道数只有64，之后每进行一次最大池化，通道数变为之前的2倍，直到增加到512为止。</p>
+<p>  下面是16层的 VGGNet 的模型图。<br><img src="https://img-blog.csdnimg.cn/20201130214328120.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><strong>图中符号表示：</strong></p>
+<ul>
+<li>conv3-64：卷积核的大小为 3*3，输出通道数为 64</li>
+<li>conv1-256：卷积核大小为 1*1，输出通道数为 256</li>
+<li>FC-4096：全连接层，输出神经元个数为 4096</li>
+<li>FC-1000：全连接层，输出神经元个数为 1000</li>
+<li>maxpool：采用最大池化</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20201130161358641.png" alt="在这里插入图片描述"></p>
+<p>  关于Table 2 的描述，在 2.2 小节中，我们来看看 2.2 小节。<br><img src="https://img-blog.csdnimg.cn/20201130162326973.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>  Table 2 展示了上面六种模型中的参数个数，从 Table 1 中，我们知道模型的深度是从11层增加到了19层，尽管深度很深，但是网络的权重的数量是不大于一个更浅更宽的网络的。</p>
+<p>  最后我们在来看看整体网络的架构（2.1）。<br><img src="https://img-blog.csdnimg.cn/20201130163021146.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>从上面几段话，可以<strong>总结如下</strong>：</p>
+<ol>
+<li>每个模型的输入都是 224x224 大小的RGB图片，而且需要在训练集上进行正则化。</li>
+<li>在卷积层中使用的是 3x3 的卷积核，在模型 C 中使用了 1x1 的卷积核</li>
+<li>六个模型都有5个最大池化层，并且池化层中使用的都是 2x2 的卷积核，并且 stride 为 2</li>
+<li>所有的隐藏层都有激活函数</li>
+<li>LRN（局部响应正则化）不能改善性能，反而会导致增加内存消耗和时间消耗</li>
+</ol>
+<hr>
+<h2 id="3-Classification-Framework"><a href="#3-Classification-Framework" class="headerlink" title="3. Classification Framework"></a>3. Classification Framework</h2><p>  下面我们接着看第3节，该节主要描述的是网络中训练和评估的细节。我们先从 3.1 的 Training 开始。</p>
+<h3 id="3-1-Training"><a href="#3-1-Training" class="headerlink" title="3.1 Training"></a>3.1 Training</h3><p><img src="https://img-blog.csdnimg.cn/20201130191846679.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>以上几段主要介绍了在训练过程中参数的设置以及初始化，以及扩充数据集的方法。总结如下：</p>
+<ul>
+<li>batch_size = 256</li>
+<li>momentum = 0.9</li>
+<li>L 2 L_2<em>L</em>2 正则项：5 ⋅ 1 0 − 4 5·10^{-4}5⋅10−4</li>
+<li>dropout：p = 0.5</li>
+<li>learning rate：0.01（当验证集准确度不变时，learning rate 变为原来的 1/10）</li>
+<li>随机初始化权重，然后用模型 A 进行训练，然后将优化后得到的权重作为更深层的网络的前4层卷积层和最后3个全连接层的初始化权重，并且这些层的学习率不进行衰减。其余层进行进行随机初始化，权重初始化为均值为0，方差为0.01的正态分布，偏差为0。</li>
+<li>但是他们在论文提交之后发现，可以不用上面的方法初始化权重，直接使用 Glorot &amp; Bengio(2010) 的随机初始化程序就能得到很好的效果。下面是 Glorot &amp; Bengio 的初始化方法。<br><img src="https://img-blog.csdnimg.cn/20201130211948621.png" alt="在这里插入图片描述"></li>
+<li>他们使用随即裁剪的方式将输入的图片大小固定在 224x224。为了扩充数据集，采用<strong>随机水平翻转和随机RGB颜色扰动</strong></li>
+</ul>
+<p>下面是对于训练图片大小的设置。<br><img src="https://img-blog.csdnimg.cn/20201130193034861.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>上面采取了两种方法来设置训练图片的大小 S。</p>
+<ol>
+<li>第一种方法：<strong>固定 S</strong>，在实验中，评估模型用了两种图片大小：256 和 384。第一次训练固定图像大小 S = 256，为了加快 S = 384 的网络，将 S = 256 模型训练得到的参数作为 S = 384 模型的初始化权重，初始化学习率为 0.001</li>
+<li>第二种方法：<strong>多尺度的训练</strong>。不固定训练图片的大小，将其固定在一个范围中 [256, 512]，在训练时，考虑到不同尺度的图片作为训练集训练网络对训练是有益的，也可以看做通过尺度抖动增加训练数据集。这样训练出来的模型可以识别各种大小的图片，由于速度方面的原因，我们训练多尺度模型的方法是对相同配置的单尺度模型的所有层进行微调，预先用固定的S = 384进行训练。</li>
+</ol>
+<h3 id="3-2-Testing"><a href="#3-2-Testing" class="headerlink" title="3.2 Testing"></a>3.2 Testing</h3><p>下面让我们来看一下测试数据集。<br><img src="https://img-blog.csdnimg.cn/20201130205155712.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><strong>总结如下：</strong></p>
+<ol>
+<li>用一张测试图片的不同大小进行测试，最后取这些结果的平均值作为该图片的结果，这样也会改善性能。</li>
+<li>在最后一个卷积层的最后我们需要做一个最大/平均池化，为了使得能够和全连接层连接上，所以需要将最后一个卷积层的输出进行规定。</li>
+</ol>
+<p>  举个栗子：假设输入的图片大小为 224x224x3，那么最后一个卷积层的输出为 7x7x512。那么如果输入图片大小为 448x448x3，那么最后一个卷积层的输出为 14x14x512。这样两个不同的尺度就不能连接同一个全连接层，所以需要对最后一个卷积层的输出做一个规定大小。那么只需要对他们做一个均值（最大）池化操作，7x7x512 池化之后就是 512，14x14x512 池化之后也是 512，这样就能与全连接层相连接了。</p>
+<p><img src="https://img-blog.csdnimg.cn/20201130214450657.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ol>
+<li>通过<strong>水平翻转图像增加扩充测试数据集</strong>，最后将原始图片和翻转后的图片的结果平均值作为该图片的最终结果。</li>
+<li>我们在评估网络时，把每张图片变为3个尺寸，从每个尺寸的图片中随即裁剪出50个不同的图片，然后一张图片就变成了150张图片
+  </li>
+</ol>
+<h3 id="3-3-Implementation-Details"><a href="#3-3-Implementation-Details" class="headerlink" title="3.3 Implementation Details"></a>3.3 Implementation Details</h3><p>最后我们再来看看实现细节（3.3）<br><img src="https://img-blog.csdnimg.cn/20201130220235636.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><strong>总结：</strong></p>
+<p>  网络进行训练和评价以及训练和评估全尺寸多尺度图像都是使用一个系统上的多个 GPU 。多 GPU 训练利用数据并行性，将每批训练图像分割成若干 GPU 批次，在每个GPU上并行处理。计算完 GPU 批处理梯度后，取其平均值，得到整个批处理的梯度。梯度计算是同步的跨 GPU，因此结果和单一 GPU 训练是完全相同的。</p>
+<p>   网络在4个 NVIDIA Titan Black GPUs 训练单个网络花费了 2-3 周。</p>
+<hr>
+<h2 id="4-Classification-Experiments"><a href="#4-Classification-Experiments" class="headerlink" title="4. Classification Experiments"></a>4. Classification Experiments</h2><p>  在第4节中，主要呈现了在 ILSVRC-2012 数据集上的分类结果，分类表现主要有两种评价指标：top-1 and top-5 errro，top-5 error 是 ILSVRC 的主要评价指标。</p>
+<h3 id="4-1-Single-Scale-Evaluation"><a href="#4-1-Single-Scale-Evaluation" class="headerlink" title="4.1 Single Scale Evaluation"></a>4.1 Single <a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=Scale&spm=1001.2101.3001.7020">Scale</a> Evaluation</h3><p>  单尺度评估。首先我们来看看4.1小节给出的表格。<br><img src="https://img-blog.csdnimg.cn/20201201074414455.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>  对于模型 A，A-LRN，B，它们都采用的是固定 S = 256，并且我们发现模型 A-LRN 的表现还没有模型 A 好，所以对于后面的模型，都没有使用 LRN（局部响应正则化），但是我们观察到从模型 A 到模型 B，<strong>随着深度的增加，top-1 和 top-5 error 也在下降</strong>。</p>
+<p>  再来观察模型 C、D、E，它们的 train 都测试了3种图片尺度，分别是 S=256，S=384，S=[256;512]。我们只看三个模型的 S=256 和 S=384，我们很容易发现不管哪一种模型，当 S=384，其模型的 top-1 和 top-5 是要优于 S=256 的。那是因为<strong>图片的分辨率越高，我们能够更容易捕捉到一些空间特征，所以其分类准确度就越高</strong>。</p>
+<p>  最后，我们再来看看的三种模型的 S=[256;512] 的这种情况，我们很容易发现这种情况的分类结果不管在哪一种模型中都是表现最好的。这也证明了<strong>通过尺度来扩充训练集确实有助于捕获多尺度图像统计</strong>。</p>
+<h3 id="4-2-Multi-Scale-Evaluation"><a href="#4-2-Multi-Scale-Evaluation" class="headerlink" title="4.2 Multi-Scale Evaluation"></a>4.2 Multi-Scale Evaluation</h3><p>  多尺度评估。主要评估在测试阶段尺度抖动对分类准确度影响。当用固定图片大小S进行训练得到的模型，会用一张测试图片的三种尺寸大小进行评估，那么三种图片大小分别为：S-32，S，S+32。当训练时不是使用的固定 S 进行训练，S 是一个变量，属于 [S m i n S_{min}<em>S<strong>m</strong>i**n</em>, S m a x S_{max}<em>S<strong>m</strong>a**x</em>]，那么我们在评估时，测试图片的大小分别是：S m i n S_{min}<em>S<strong>m</strong>i**n</em>, 0.5 ( S m i n + S m a x ) 0.5(S_{min} + S_{max})0.5(<em>S<strong>m</strong>i**n</em>+<em>S<strong>m</strong>a**x</em>), S m a x S_{max}<em>S<strong>m</strong>a**x</em>。</p>
+<p>  评估结果如下：<br><img src="https://img-blog.csdnimg.cn/20201201082352597.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>  根据表格我们可以得出结论：在<strong>测试阶段的尺度抖动相较于单尺度的相同模型会有更好的表现</strong>。其中模型 D 和 E 表现最好。表现最好的单个网络在验证数据集上 top-1 和 top-5 error 达到了 24.8%/7.5%，在测试数据集上，模型 E 达到了 7.3 % 的 top-5 error。</p>
+<h3 id="4-3-Multi-Crop-Evaluation"><a href="#4-3-Multi-Crop-Evaluation" class="headerlink" title="4.3 Multi-Crop Evaluation"></a>4.3 Multi-Crop Evaluation</h3><p>  多裁剪评估。这里主要用到两种评估方法，一种是 dense，即评估时所使用的图片是整张图片，不经过任何裁剪。那么另一种就是 multi-crop，就是评估时使用的是裁剪后的图片。评估结果如下表：<br><img src="https://img-blog.csdnimg.cn/20201201083757438.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>  从评估结果来看，<strong>使用 multi-crop 要比使用 dense 的表现稍微好一些</strong>，而且两种方法结合使用的表现比单独使用任何一种方法的效果都要好，因为两种方法是互补的。
+  </p>
+<h3 id="4-4-Convent-Fusion"><a href="#4-4-Convent-Fusion" class="headerlink" title="4.4 Convent Fusion"></a>4.4 Convent Fusion</h3><p>  模型融合。通过融合几种模型，最后取各个模型的 soft-max 结果的平均值作为模型的输出。下面是融合不同模型得到的实验结果。<br><img src="https://img-blog.csdnimg.cn/20201201084753151.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>  可以从实验结果发现，融合一个模型 D 和模型 E ，并且在评估时使用 multi-crop 和 dense 的方法得到的表现最好。</p>
+<p>  </p>
+<h3 id="4-5-Comparison-With-The-State-Of-The-Art"><a href="#4-5-Comparison-With-The-State-Of-The-Art" class="headerlink" title="4.5 Comparison With The State Of The Art"></a>4.5 Comparison With The State Of The Art</h3><p>  主要是和 ILSVRC 比赛中表现比较好的模型进行比较，下表是在挑战赛中表现比较好的模型。<br><img src="https://img-blog.csdnimg.cn/20201201085309296.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>  在 2014 年的挑战赛中，GoogLeNet 以 6.7% 的 error 夺冠，VGGNet 以 6.8% 的 error 获得第二名。但是如果从一个网络的分类准确度来看，VGG 是以 7.0% 的 error 要优于 GoogLeNet 的 7.9%。</p>
+<hr>
+<h2 id="论文总结"><a href="#论文总结" class="headerlink" title="论文总结"></a>论文总结</h2><p>  在研究完每篇论文之后，我们都需要做一个总结。</p>
+<p>  那么我们先来看一下这篇论文的总结是什么?<br><img src="https://img-blog.csdnimg.cn/20201201090134263.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDMzMDEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>再次强调了<strong>深度确实能够增加分类准确度</strong>。</p>
+<hr>
+<p>下面就来进行自我总结。</p>
+<p><strong>创新点</strong></p>
+<ul>
+<li>整个网络都采用 3x3 的卷积核，从而增加神经网络的深度。两个3x3卷积核的堆叠代替一个5x5卷积核，三个3x3卷积核代替一个7x7卷积核。这样一方面能够减少参数的数量，另一方面拥有更多的非线性变化。</li>
+<li>在卷积结构中引入1x1的卷积核，在不影响输入输出维度的情况下，引入非线性变换，增加网络的表达能力，降低计算量</li>
+<li>通过预训练的方式来更好的初始化权重，加快训练的收敛速度</li>
+<li>采用 Multi-Scale 的方式训练和预测，可以扩充数据集，防止过拟合，提升预测准确率。</li>
+<li>深层网络更适合于大的数据集</li>
+</ul>
+<p><strong>启发点</strong></p>
+<ul>
+<li>深度能够提高网络的分类准确率</li>
+<li>为了加快收敛速度，可以使用预训练的方式初始化权重</li>
+<li>在更深层的网络中，LRN方法并没有什么用，反而会导致内存和时间的消耗</li>
+<li>通过堆叠小卷积核可以减少网络参数，增加网络深度，提升网络性能</li>
+<li>在训练和测试使用 Multi-Scale 可以扩充数据集，防止过拟合</li>
+</ul>
+<hr>
+<p> </p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>VGG论文精读</p><p><a href="http://williamleung.cn/posts/483895fb/">http://williamleung.cn/posts/483895fb/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>William</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2022-05-27</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2022-05-27</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="" rel="noopener" target="_blank" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/AlexNet/">AlexNet</a><a class="link-muted mr-2" rel="tag" href="/tags/%E8%AE%BA%E6%96%87/">论文</a><a class="link-muted mr-2" rel="tag" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><a class="link-muted mr-2" rel="tag" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">神经网络</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=61486dd4f48362001928a658&amp;product=inline-share-buttons" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="https://s3.bmp.ovh/imgs/2021/09/87da4b64c8c15c26.jpg" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="https://s3.bmp.ovh/imgs/2021/09/010147419ee842be.jpg" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/posts/12577bd1/"><span class="level-item">AlexNet论文精读</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="SOHUCS" sid="posts/483895fb/"></div><script charset="utf-8" src="https://changyan.sohu.com/upload/changyan.js"></script><script>window.changyan.api.config({appid: 'cyvFsKL3O',conf: 'prod_f74cae8cf60a3e05e786c3be168ebe03'});</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="https://img2.baidu.com/it/u=1470655022,1507167867&amp;fm=26&amp;fmt=auto" alt="William"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">William</p><p class="is-size-6 is-block">一个学计算机的大学生</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Hangzhou, China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">3</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">3</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">6</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/mrwilliamleung" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/mrwilliamleung"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="QQ" href="http://wpa.qq.com/msgrd?v=3&amp;uin=858920934&amp;site=qq&amp;menu=yes"><i class="fab fa-qq"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Instagram" href="https://www.instagram.com/mr_williamleung/"><i class="fab fa-instagram"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://www.Google.com/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Google</span></span><span class="level-right"><span class="level-item tag">www.google.com</span></span></a></li><li><a class="level is-mobile" href="https://www.baidu.com/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Baidu</span></span><span class="level-right"><span class="level-item tag">www.baidu.com</span></span></a></li><li><a class="level is-mobile" href="https://en.wikipedia.org/wiki/Main_Page" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Wiki</span></span><span class="level-right"><span class="level-item tag">en.wikipedia.org</span></span></a></li><li><a class="level is-mobile" href="https://www.bilibili.com/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Bilibili</span></span><span class="level-right"><span class="level-item tag">www.bilibili.com</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E5%85%B3%E4%BA%8E/"><span class="level-start"><span class="level-item">关于</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"><span class="level-start"><span class="level-item">计算机</span></span><span class="level-end"><span class="level-item tag">2</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"><span class="level-start"><span class="level-item">人工智能</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-05-27T14:15:13.000Z">2022-05-27</time></p><p class="title"><a href="/posts/483895fb/">VGG论文精读</a></p><p class="categories"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a> / <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-09-22T19:21:43.000Z">2021-09-23</time></p><p class="title"><a href="/posts/12577bd1/">AlexNet论文精读</a></p><p class="categories"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a> / <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-09-20T15:27:44.000Z">2021-09-20</time></p><p class="title"><a href="/posts/1/">关于个人博客网站的说明</a></p><p class="categories"><a href="/categories/%E5%85%B3%E4%BA%8E/">关于</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2022/05/"><span class="level-start"><span class="level-item">五月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/09/"><span class="level-start"><span class="level-item">九月 2021</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/AlexNet/"><span class="tag">AlexNet</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"><span class="tag">个人博客</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"><span class="tag">深度学习</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"><span class="tag">神经网络</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%BA%E6%96%87/"><span class="tag">论文</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%B4%E6%98%8E/"><span class="tag">说明</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="WilliamLeung的个人博客" height="28"></a><p class="is-size-7"><span>&copy; 2022 William</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><div id="outdated"><h6>Your browser is out-of-date!</h6><p>Update your browser to view this website correctly.&amp;npsb;<a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p><p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">×</a></p></div><script src="https://cdnjs.loli.net/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js" defer></script><script>window.addEventListener("load", function () {
+            outdatedBrowser({
+                bgColor: '#f25648',
+                color: '#ffffff',
+                lowerThan: 'object-fit' // display on IE11 or below
+            });
+        });</script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
